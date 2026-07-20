@@ -1,0 +1,173 @@
+/*
+ * Device presets — single-class aliases for primitive combinations.
+ * Markup: <div class="pf-iphone-14-pro"><div class="pf-screen">…</div></div>
+ *
+ * Equivalent primitive stacks (for reference / manual composition):
+ *   pf-iphone-14-pro → pf-shell + pf-island + pf--titanium + pf--round
+ *   pf-iphone-x      → pf-shell + pf-notch  + pf--black     + pf--round
+ *   pf-pixel-7       → pf-shell + pf-punchhole + pf--black   + pf--flat
+ *   pf-galaxy-s23    → pf-shell + pf-punchhole + pf--black   + pf--round
+ */
+
+/* Shared shell geometry (mirrors .pf-shell) */
+:is(.pf-iphone-14-pro, .pf-iphone-x, .pf-pixel-7, .pf-galaxy-s23) {
+  --pf-width: 300px;
+  --pf-ratio: 9 / 19.5;
+  --pf-bezel: calc(var(--pf-width) * 0.044);
+  --pf-radius: calc(var(--pf-width) * 0.158);
+  --pf-screen-radius: calc(var(--pf-width) * 0.114);
+  --pf-frame-color: #1a1a1a;
+  --pf-btn-color: #5c5854;
+  --pf-island-color: #010101;
+  --pf-shadow:
+    0 24px 48px -12px rgba(0, 0, 0, 0.4),
+    0 8px 16px -8px rgba(0, 0, 0, 0.25),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+
+  display: block;
+  position: relative;
+  width: var(--pf-width);
+  padding: var(--pf-bezel);
+  background: var(--pf-frame-color);
+  border-radius: var(--pf-radius);
+  box-shadow: var(--pf-shadow);
+}
+
+/* pf-iphone-14-pro — titanium frame, round corners, Dynamic Island */
+.pf-iphone-14-pro {
+  --pf-frame-color: #8a8680;
+  --pf-btn-color: #6e6a65;
+  --pf-island-color: #010101;
+  --pf-shadow:
+    0 24px 48px -12px rgba(0, 0, 0, 0.38),
+    0 8px 16px -8px rgba(0, 0, 0, 0.24),
+    inset 0 0 4px 2px rgba(255, 255, 255, 0.15),
+    inset 0 0 0 5px #7a7670;
+}
+
+.pf-iphone-14-pro > .pf-screen::before {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: 10;
+  top: calc(var(--pf-width) * 0.028);
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(var(--pf-width) * 0.28);
+  height: calc(var(--pf-width) * 0.082);
+  border-radius: calc(var(--pf-width) * 0.041);
+  background: var(--pf-island-color);
+  pointer-events: none;
+}
+
+.pf-iphone-14-pro > .pf-screen::after {
+  content: "";
+  position: absolute;
+  z-index: 11;
+  top: calc(var(--pf-width) * 0.052);
+  left: 50%;
+  transform: translateX(calc(var(--pf-width) * 0.042));
+  width: calc(var(--pf-width) * 0.021);
+  height: calc(var(--pf-width) * 0.021);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 30%, #6074bf 0%, transparent 45%),
+    radial-gradient(circle at 70% 70%, #513785 0%, #24555e 35%, transparent 60%);
+  box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.05);
+  pointer-events: none;
+}
+
+/* pf-iphone-x — black frame, round corners, centered notch */
+.pf-iphone-x {
+  --pf-frame-color: #1a1a1a;
+  --pf-btn-color: #3d3d3d;
+  --pf-island-color: #010101;
+}
+
+.pf-iphone-x > .pf-screen::before {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(var(--pf-width) * 0.476);
+  height: calc(var(--pf-width) * 0.07);
+  border-bottom-left-radius: calc(var(--pf-width) * 0.047);
+  border-bottom-right-radius: calc(var(--pf-width) * 0.047);
+  background: var(--pf-island-color);
+  pointer-events: none;
+}
+
+.pf-iphone-x > .pf-screen::after {
+  content: "";
+  position: absolute;
+  z-index: 11;
+  top: calc(var(--pf-width) * 0.023);
+  left: 50%;
+  transform: translateX(calc(var(--pf-width) * 0.098));
+  width: calc(var(--pf-width) * 0.023);
+  height: calc(var(--pf-width) * 0.023);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 30%, #6074bf 0%, transparent 45%),
+    radial-gradient(circle at 70% 70%, #513785 0%, #24555e 35%, transparent 60%);
+  box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.05);
+  pointer-events: none;
+}
+
+/* pf-pixel-7 — black frame, flat corners, left punchhole */
+.pf-pixel-7 {
+  --pf-frame-color: #1a1a1a;
+  --pf-btn-color: #3d3d3d;
+  --pf-island-color: #010101;
+  --pf-radius: calc(var(--pf-width) * 0.012);
+  --pf-screen-radius: calc(var(--pf-width) * 0.008);
+}
+
+.pf-pixel-7 > .pf-screen::before {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: 10;
+  top: calc(var(--pf-bezel) * 0.4 + var(--pf-width) * 0.028);
+  left: calc(var(--pf-bezel) + var(--pf-width) * 0.065);
+  width: calc(var(--pf-width) * 0.033);
+  height: calc(var(--pf-width) * 0.033);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 30%, #6074bf 0%, transparent 45%),
+    radial-gradient(circle at 70% 70%, #1a1a1a 0%, #000 60%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 0 0 calc(var(--pf-width) * 0.005) var(--pf-island-color);
+  pointer-events: none;
+}
+
+/* pf-galaxy-s23 — black frame, round corners, center punchhole */
+.pf-galaxy-s23 {
+  --pf-frame-color: #1a1a1a;
+  --pf-btn-color: #3d3d3d;
+  --pf-island-color: #010101;
+}
+
+.pf-galaxy-s23 > .pf-screen::before {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: 10;
+  top: calc(var(--pf-width) * 0.035);
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(var(--pf-width) * 0.033);
+  height: calc(var(--pf-width) * 0.033);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 30%, #6074bf 0%, transparent 45%),
+    radial-gradient(circle at 70% 70%, #1a1a1a 0%, #000 60%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 0 0 calc(var(--pf-width) * 0.005) var(--pf-island-color);
+  pointer-events: none;
+}

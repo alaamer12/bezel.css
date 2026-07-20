@@ -1,0 +1,221 @@
+/* phone-frames — shell primitives */
+
+[class*="pf-"],
+[class*="pf-"]::before,
+[class*="pf-"]::after {
+  box-sizing: border-box;
+}
+
+/* --- Outer frame --- */
+
+.pf-shell {
+  display: block;
+  position: relative;
+  width: var(--pf-width);
+  padding: var(--pf-bezel);
+  background: var(--pf-frame-color);
+  border-radius: var(--pf-radius);
+  box-shadow: var(--pf-shadow);
+}
+
+/* --- Screen viewport --- */
+
+.pf-screen {
+  position: relative;
+  width: 100%;
+  aspect-ratio: var(--pf-ratio);
+  overflow: hidden;
+  border-radius: var(--pf-screen-radius);
+  background: #000;
+  display: block;
+}
+
+.pf-screen:is(.pf-screen--flex, :has(> :not(iframe, img, .pf-status-bar, .pf-scroll-view, .pf-tab-bar))) {
+  display: flex;
+  flex-direction: column;
+}
+
+.pf-screen:is(img) {
+  display: block;
+  object-fit: cover;
+  border: 0;
+}
+
+.pf-screen:is(iframe),
+.pf-screen:has(> iframe),
+.pf-screen > iframe {
+  border: 0;
+  outline: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  box-shadow: none;
+  /* Add overflow visible to allow the scaled iframe to bleed out slightly without being clipped by the inner screen layer */
+  overflow: visible;
+  /* Remove border-radius to prevent sub-pixel gaps between the rounded container and the scaled iframe */
+  border-radius: 0;
+}
+
+/* Disable inner shell shadow when hosting an iframe to prevent dark line artifacts */
+.pf-shell:has(.pf-screen > iframe),
+.pf-iphone-14-pro:has(.pf-screen > iframe),
+.pf-iphone-x:has(.pf-screen > iframe),
+.pf-pixel-7:has(.pf-screen > iframe),
+.pf-galaxy-s23:has(.pf-screen > iframe) {
+  box-shadow: var(--pf-shadow-no-inset, 0 24px 48px -12px rgba(0, 0, 0, 0.4));
+}
+
+.pf-island,
+.pf-notch,
+.pf-punchhole {
+  display: block;
+}
+
+.pf-shell.pf-island > .pf-screen::before,
+.pf-shell > .pf-island {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: 10;
+  top: calc(var(--pf-width) * 0.028);
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(var(--pf-width) * 0.28);
+  height: calc(var(--pf-width) * 0.082);
+  border-radius: calc(var(--pf-width) * 0.041);
+  background: var(--pf-island-color);
+  pointer-events: none;
+}
+
+.pf-shell > .pf-island {
+  margin: 0;
+  top: calc(var(--pf-bezel) + var(--pf-width) * 0.028);
+}
+
+/* Camera lens dot inside island */
+.pf-shell.pf-island > .pf-screen::after,
+.pf-shell > .pf-island::after {
+  content: "";
+  position: absolute;
+  z-index: 11;
+  top: calc(var(--pf-width) * 0.052);
+  left: 50%;
+  transform: translateX(calc(var(--pf-width) * 0.042));
+  width: calc(var(--pf-width) * 0.021);
+  height: calc(var(--pf-width) * 0.021);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 30%, #6074bf 0%, transparent 45%),
+    radial-gradient(circle at 70% 70%, #513785 0%, #24555e 35%, transparent 60%);
+  box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.05);
+  pointer-events: none;
+}
+
+.pf-shell > .pf-island::after {
+  top: 50%;
+  left: 62%;
+  transform: translate(-50%, -50%);
+}
+
+/* --- Notch (iPhone X style) --- */
+
+.pf-shell.pf-notch > .pf-screen::before,
+.pf-shell > .pf-notch {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(var(--pf-width) * 0.476);
+  height: calc(var(--pf-width) * 0.07);
+  border-bottom-left-radius: calc(var(--pf-width) * 0.047);
+  border-bottom-right-radius: calc(var(--pf-width) * 0.047);
+  background: var(--pf-island-color);
+  pointer-events: none;
+}
+
+.pf-shell > .pf-notch {
+  margin: 0;
+  top: var(--pf-bezel);
+}
+
+.pf-shell.pf-notch > .pf-screen::after,
+.pf-shell > .pf-notch::after {
+  content: "";
+  position: absolute;
+  z-index: 11;
+  top: calc(var(--pf-width) * 0.023);
+  left: 50%;
+  transform: translateX(calc(var(--pf-width) * 0.098));
+  width: calc(var(--pf-width) * 0.023);
+  height: calc(var(--pf-width) * 0.023);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 30%, #6074bf 0%, transparent 45%),
+    radial-gradient(circle at 70% 70%, #513785 0%, #24555e 35%, transparent 60%);
+  box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.05);
+  pointer-events: none;
+}
+
+.pf-shell > .pf-notch::after {
+  top: calc(var(--pf-width) * 0.023);
+}
+
+/* --- Punch-hole camera (Pixel / Galaxy style) --- */
+
+.pf-shell.pf-punchhole > .pf-screen::before,
+.pf-shell > .pf-punchhole {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: 10;
+  top: calc(var(--pf-bezel) * 0.4 + var(--pf-width) * 0.028);
+  left: calc(var(--pf-bezel) + var(--pf-width) * 0.065);
+  width: calc(var(--pf-width) * 0.033);
+  height: calc(var(--pf-width) * 0.033);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 30%, #6074bf 0%, transparent 45%),
+    radial-gradient(circle at 70% 70%, #1a1a1a 0%, #000 60%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 0 0 calc(var(--pf-width) * 0.005) var(--pf-island-color);
+  pointer-events: none;
+}
+
+.pf-shell > .pf-punchhole {
+  margin: 0;
+}
+
+/* --- Side buttons (volume + power) --- */
+
+.pf-shell.pf-buttons::before,
+.pf-shell.pf-buttons::after {
+  content: "";
+  position: absolute;
+  z-index: 5;
+  width: calc(var(--pf-width) * 0.007);
+  border-radius: calc(var(--pf-width) * 0.005);
+  background: var(--pf-btn-color);
+  pointer-events: none;
+}
+
+/* Left: mute + volume up/down */
+.pf-shell.pf-buttons::before {
+  left: calc(var(--pf-width) * -0.005);
+  top: calc(var(--pf-width) * 0.268);
+  height: calc(var(--pf-width) * 0.075);
+  box-shadow:
+    0 calc(var(--pf-width) * 0.14) 0 0 var(--pf-btn-color),
+    0 calc(var(--pf-width) * 0.327) 0 0 var(--pf-btn-color);
+}
+
+/* Right: power */
+.pf-shell.pf-buttons::after {
+  right: calc(var(--pf-width) * -0.005);
+  top: calc(var(--pf-width) * 0.467);
+  height: calc(var(--pf-width) * 0.233);
+}

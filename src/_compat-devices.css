@@ -1,0 +1,12 @@
+/*
+ * Legacy devices.css compatibility
+ *
+ * The original .device / .marvel-device class namespaces live in dist/devices.css
+ * (compiled from src/devices.scss). Link that file separately when you need legacy
+ * mockups alongside phone-frames:
+ *
+ *   <link rel="stylesheet" href="dist/phone-frames.css">
+ *   <link rel="stylesheet" href="dist/devices.css">
+ *
+ * phone-frames uses the pf-* namespace only; no .device rules are re-exported here.
+ */

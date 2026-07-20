@@ -1,0 +1,323 @@
+/* In-screen UI regions — parent .pf-screen is flex column, full height */
+
+.pf-status-bar {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 44px;
+  min-height: 44px;
+  padding: env(safe-area-inset-top, 0) max(16px, env(safe-area-inset-right, 0)) 0 max(16px, env(safe-area-inset-left, 0));
+  box-sizing: border-box;
+  position: relative;
+  z-index: 10;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.pf-status-bar__icons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Status Bar Icons — can be used manually with these classes */
+.apps-statusbar-wifi,
+.apps-statusbar-signal,
+.apps-statusbar-battery,
+.apps-statusbar-4g,
+.apps-statusbar-5g,
+.apps-statusbar-sim {
+  display: inline-block;
+  width: 18px;
+  height: 12px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  vertical-align: middle;
+}
+
+.apps-statusbar-sim {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 12'%3E%3Crect x='0' y='9' width='2' height='3' rx='0.2' fill='white'/%3E%3Crect x='3' y='7' width='2' height='5' rx='0.2' fill='white'/%3E%3Crect x='6' y='5' width='2' height='7' rx='0.2' fill='white'/%3E%3Crect x='9' y='3' width='2' height='9' rx='0.2' fill='white'/%3E%3Crect x='12' y='1' width='2' height='11' rx='0.2' fill='white'/%3E%3Cpath d='M15 0h2v12h-2z' fill='white' opacity='0.3'/%3E%3C/svg%3E");
+}
+
+.apps-statusbar-wifi {
+  width: 18px;
+  height: 13px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 13'%3E%3Cpath d='M9 13c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z' fill='white'/%3E%3Cpath d='M15 7.5C13.4 5.9 11.3 5 9 5s-4.4.9-6 2.5L1.5 6C3.4 4.1 6.1 3 9 3s5.6 1.1 7.5 3L15 7.5z' fill='white'/%3E%3Cpath d='M18 4.5C15.5 2 12.4.5 9 .5S2.5 2 0 4.5L1.5 6C3.6 3.9 6.1 2.5 9 2.5s5.4 1.4 7.5 3.5L18 4.5z' fill='white'/%3E%3C/svg%3E");
+}
+
+.apps-statusbar-signal {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 12'%3E%3Crect x='0' y='8' width='3' height='4' rx='0.5' fill='white'/%3E%3Crect x='5' y='5' width='3' height='7' rx='0.5' fill='white'/%3E%3Crect x='10' y='2' width='3' height='10' rx='0.5' fill='white'/%3E%3Crect x='15' y='0' width='3' height='12' rx='0.5' fill='white'/%3E%3C/svg%3E");
+}
+
+.apps-statusbar-battery {
+  width: 27px;
+  height: 13px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 27 13'%3E%3Crect x='0.5' y='0.5' width='22' height='12' rx='2.5' fill='none' stroke='white'/%3E%3Crect x='2.5' y='2.5' width='16' height='8' rx='1.5' fill='white'/%3E%3Crect x='23.5' y='4' width='2.5' height='5' rx='1' fill='white'/%3E%3C/svg%3E");
+}
+
+.apps-statusbar-4g,
+.apps-statusbar-5g {
+  width: auto;
+  min-width: 20px;
+  height: 13px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 13px;
+  text-align: center;
+}
+
+.apps-statusbar-4g::before {
+  content: "4G";
+}
+
+.apps-statusbar-5g::before {
+  content: "5G";
+}
+
+.apps-statusbar-time {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/* App Icons */
+.apps-icon {
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  vertical-align: middle;
+}
+
+.apps-icon--ios {
+  border-radius: 10px;
+}
+
+.apps-icon--android {
+  border-radius: 50%;
+}
+
+/* Apple System Icons */
+.apps-icon-safari {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='24' fill='%23fff'/%3E%3Ccircle cx='24' cy='24' r='22' fill='%231fa9e5'/%3E%3Cpath d='M24 6l-3 15h6z' fill='%23ff3b30'/%3E%3Cpath d='M24 42l-3-15h6z' fill='%23f2f2f2'/%3E%3Ccircle cx='24' cy='24' r='2' fill='%23fff'/%3E%3C/svg%3E");
+}
+
+.apps-icon-photos {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='10' fill='%23fff'/%3E%3Ccircle cx='24' cy='14' r='6' fill='%23ff3b30' opacity='0.8'/%3E%3Ccircle cx='34' cy='18' r='6' fill='%23ff9500' opacity='0.8'/%3E%3Ccircle cx='38' cy='28' r='6' fill='%23ffcc00' opacity='0.8'/%3E%3Ccircle cx='30' cy='36' r='6' fill='%234cd964' opacity='0.8'/%3E%3Ccircle cx='18' cy='36' r='6' fill='%235ac8fa' opacity='0.8'/%3E%3Ccircle cx='10' cy='28' r='6' fill='%23007aff' opacity='0.8'/%3E%3Ccircle cx='14' cy='18' r='6' fill='%235856d6' opacity='0.8'/%3E%3C/svg%3E");
+}
+
+.apps-icon-settings {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='10' fill='%238e8e93'/%3E%3Cpath d='M24 16a8 8 0 100 16 8 8 0 000-16z' fill='%23d1d1d6'/%3E%3Cpath d='M24 12v4m0 16v4m-10-10h-4m20 0h4m-17.1-7.1l-2.8-2.8m17.1 17.1l2.8 2.8m-17.1 2.8l-2.8 2.8m17.1-17.1l2.8-2.8' stroke='%23d1d1d6' stroke-width='4'/%3E%3C/svg%3E");
+}
+
+.apps-icon-messages {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='10' fill='%234cd964'/%3E%3Cpath d='M24 10c-8.8 0-16 6-16 13.5 0 4.2 2.3 8 6 10.5-.3 2.5-2 5.5-2 5.5s4 0 8.5-3c1.2.3 2.5.5 3.5.5 8.8 0 16-6 16-13.5S32.8 10 24 10z' fill='white'/%3E%3C/svg%3E");
+}
+
+.apps-icon-phone {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='10' fill='%234cd964'/%3E%3Cpath d='M34.5 30c-2 0-3.8-.6-5.4-1.8-1.2-.9-1.5-2.4-.8-3.7l1.2-2.1c.4-.7.3-1.6-.3-2.2l-4.5-4.5c-.6-.6-1.5-.7-2.2-.3l-2.1 1.2c-1.3.7-2.8.4-3.7-.8-1.2-1.6-1.8-3.4-1.8-5.4 0-1.1.9-2 2-2h3.5c.8 0 1.5.5 1.8 1.2.9 2.5 2.4 4.7 4.4 6.6s4.1 3.5 6.6 4.4c.7.3 1.2 1 1.2 1.8v3.5c0 1.1-.9 2-2 2z' fill='white'/%3E%3C/svg%3E");
+}
+
+/* Android / Google Icons */
+.apps-icon-google {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath d='M44.5 24.5c0-1.5-.1-3-.4-4.5H24v8.5h11.5c-.5 2.7-2 5-4.3 6.5l7 5.5c4-3.7 6.3-9 6.3-16z' fill='%234285F4'/%3E%3Cpath d='M24 45c5.7 0 10.5-1.9 14.1-5.1l-7-5.5c-2 .1-4.2-.2-6-.9-4.1-1.4-7.4-4.5-8.8-8.5l-7.2 5.6C9 37.8 15.9 45 24 45z' fill='%2334A853'/%3E%3Cpath d='M5.1 30c-.6-1.8-.9-3.8-.9-6s.3-4.2.9-6l-7.2-5.6C-3.9 16.5-5 20.1-5 24s1.1 7.5 3.1 11.4L5.1 30z' fill='%23FBBC05'/%3E%3Cpath d='M24 10.5c3.1 0 5.9 1.1 8.1 3.2l6.1-6.1C34.5 4.1 29.7 2 24 2 15.9 2 9 9.2 5.1 18.4l7.2 5.6c1.4-4 4.7-7.1 8.8-8.5z' fill='%23EA4335'/%3E%3C/svg%3E");
+}
+
+.apps-icon-maps {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath d='M24 2C15.2 2 8 9.2 8 18c0 12 16 28 16 28s16-16 16-28c0-8.8-7.2-16-16-16zm0 24c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8z' fill='%2334A853'/%3E%3Ccircle cx='24' cy='18' r='4' fill='%23fff'/%3E%3C/svg%3E");
+}
+
+.apps-icon-gmail {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath d='M42 12H6c-1.1 0-2 .9-2 2v20c0 1.1.9 2 2 2h36c1.1 0 2-.9 2-2V14c0-1.1-.9-2-2-2zm-2 4l-16 10L8 16h32z' fill='%23EA4335'/%3E%3C/svg%3E");
+}
+
+.apps-icon-youtube {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath d='M46.1 12.5c-.5-2.1-2.2-3.8-4.3-4.3C38 7.3 24 7.3 24 7.3s-14 0-17.8.9c-2.1.5-3.8 2.2-4.3 4.3C1 16.3 1 24 1 24s0 7.7.9 11.5c.5 2.1 2.2 3.8 4.3 4.3 3.8.9 17.8.9 17.8.9s14 0 17.8-.9c2.1-.5 3.8-2.2 4.3-4.3.9-3.8.9-11.5.9-11.5s0-7.7-.9-11.5z' fill='%23FF0000'/%3E%3Cpath d='M19 31l12-7-12-7z' fill='white'/%3E%3C/svg%3E");
+}
+
+.apps-icon-playstore {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath d='M8 4l28 20L8 44V4z' fill='%234285F4'/%3E%3Cpath d='M36 24L8 44V24l28 0z' fill='%2334A853'/%3E%3Cpath d='M8 4l28 20L8 24V4z' fill='%23FBBC05'/%3E%3Cpath d='M36 24L8 4l20 20-20 20 28-20z' fill='%23EA4335'/%3E%3C/svg%3E");
+}
+
+/* iOS style: Time centered */
+.pf-status-bar--ios .pf-status-bar__time {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Android style: Time on left, icons on right */
+.pf-status-bar--android {
+  justify-content: space-between;
+}
+
+.pf-nav-bar {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 max(16px, env(safe-area-inset-left, 0)) 0 max(16px, env(safe-area-inset-right, 0));
+  box-sizing: border-box;
+  position: relative;
+  z-index: 9;
+}
+
+.pf-nav-bar__title {
+  flex: 1;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pf-scroll-view {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overflow-y: overlay; /* Support for overlay scrollbar where available */
+  /* Default: hide scrollbar but allow scrolling */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.pf-scroll-view::-webkit-scrollbar {
+  display: none;
+}
+
+/* --- Scrollbar variations --- */
+
+.pf-scroll-view--ios {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.45) transparent;
+}
+
+.pf-scroll-view--ios::-webkit-scrollbar {
+  display: block;
+  width: 6px;
+}
+
+.pf-scroll-view--ios::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.pf-scroll-view--ios::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.45);
+  border-radius: 10px;
+  border: 1.5px solid transparent;
+  background-clip: padding-box;
+}
+
+.pf-scroll-view--android {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.5) transparent;
+}
+
+.pf-scroll-view--android::-webkit-scrollbar {
+  display: block;
+  width: 5px;
+}
+
+.pf-scroll-view--android::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.pf-scroll-view--android::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 0;
+}
+
+.pf-scroll-view--none {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+.pf-scroll-view--none::-webkit-scrollbar {
+  display: none !important;
+}
+
+.pf-tab-bar {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  height: 50px;
+  min-height: 50px;
+  padding-bottom: env(safe-area-inset-bottom, 0);
+  padding-left: env(safe-area-inset-left, 0);
+  padding-right: env(safe-area-inset-right, 0);
+  box-sizing: border-box;
+  position: relative;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Home indicator (gesture pill) — modern iOS/Android */
+.pf-tab-bar--pill::after {
+  content: "";
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 5px;
+  border-radius: 3px;
+  background: currentColor;
+  opacity: 0.8;
+}
+
+/* Three-button navigation — classic Android */
+.pf-tab-bar--buttons {
+  justify-content: space-evenly;
+  height: 48px;
+  min-height: 48px;
+}
+
+.pf-tab-bar__btn {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.7;
+}
+
+.pf-tab-bar__btn--back::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  border-left: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+}
+
+.pf-tab-bar__btn--home::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+}
+
+.pf-tab-bar__btn--recent::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  border: 2px solid currentColor;
+  border-radius: 2px;
+}

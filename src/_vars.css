@@ -1,0 +1,50 @@
+/* phone-frames — CSS custom properties */
+
+:root {
+  --pf-width: 300px;
+  --pf-ratio: 9 / 19.5;
+  --pf-bezel: calc(var(--pf-width) * 0.044);
+  --pf-radius: calc(var(--pf-width) * 0.158);
+  --pf-screen-radius: calc(var(--pf-width) * 0.114);
+  --pf-frame-color: #1a1a1a;
+  --pf-btn-color: #5c5854;
+  --pf-island-color: #010101;
+  --pf-shadow:
+    0 24px 48px -12px rgba(0, 0, 0, 0.4),
+    0 8px 16px -8px rgba(0, 0, 0, 0.25),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --pf-shadow-no-inset:
+    0 24px 48px -12px rgba(0, 0, 0, 0.4),
+    0 8px 16px -8px rgba(0, 0, 0, 0.25);
+}
+
+/* Scoped defaults — override per shell instance */
+.pf-shell {
+  --pf-width: 300px;
+  --pf-ratio: 9 / 19.5;
+  --pf-bezel: calc(var(--pf-width) * 0.044);
+  --pf-radius: calc(var(--pf-width) * 0.158);
+  --pf-screen-radius: calc(var(--pf-width) * 0.114);
+  --pf-frame-color: #1a1a1a;
+  --pf-btn-color: #5c5854;
+  --pf-island-color: #010101;
+  --pf-shadow:
+    0 24px 48px -12px rgba(0, 0, 0, 0.4),
+    0 8px 16px -8px rgba(0, 0, 0, 0.25),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --pf-shadow-no-inset:
+    0 24px 48px -12px rgba(0, 0, 0, 0.4),
+    0 8px 16px -8px rgba(0, 0, 0, 0.25);
+}
+
+.pf--sm {
+  --pf-width: 240px;
+}
+
+.pf--md {
+  --pf-width: 300px;
+}
+
+.pf--lg {
+  --pf-width: 380px;
+}

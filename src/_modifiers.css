@@ -1,0 +1,95 @@
+/* phone-frames — modifier classes */
+
+/* --- Frame color presets --- */
+
+.pf--black {
+  --pf-frame-color: #1a1a1a;
+  --pf-btn-color: #3d3d3d;
+  --pf-island-color: #010101;
+}
+
+.pf--silver {
+  --pf-frame-color: #e2e3e4;
+  --pf-btn-color: #c8c9ca;
+  --pf-island-color: #222;
+  --pf-shadow:
+    0 24px 48px -12px rgba(0, 0, 0, 0.3),
+    0 8px 16px -8px rgba(0, 0, 0, 0.18),
+    inset 0 0 2px 2px #c8c9ca,
+    inset 0 0 0 5px #e2e3e4;
+}
+
+.pf--gold {
+  --pf-frame-color: #e8dcc4;
+  --pf-btn-color: #b8a882;
+  --pf-island-color: #010101;
+  --pf-shadow:
+    0 24px 48px -12px rgba(0, 0, 0, 0.35),
+    0 8px 16px -8px rgba(0, 0, 0, 0.22),
+    inset 0 0 4px 2px rgba(255, 250, 235, 0.5),
+    inset 0 0 0 5px #c9b896;
+}
+
+.pf--titanium {
+  --pf-frame-color: #8a8680;
+  --pf-btn-color: #6e6a65;
+  --pf-island-color: #010101;
+  --pf-shadow:
+    0 24px 48px -12px rgba(0, 0, 0, 0.38),
+    0 8px 16px -8px rgba(0, 0, 0, 0.24),
+    inset 0 0 4px 2px rgba(255, 255, 255, 0.15),
+    inset 0 0 0 5px #7a7670;
+}
+
+/* --- Corner radius presets --- */
+
+.pf--round {
+  --pf-radius: calc(var(--pf-width) * 0.158);
+  --pf-screen-radius: calc(var(--pf-width) * 0.114);
+}
+
+.pf--square {
+  --pf-radius: calc(var(--pf-width) * 0.04);
+  --pf-screen-radius: calc(var(--pf-width) * 0.028);
+}
+
+.pf--flat {
+  --pf-radius: calc(var(--pf-width) * 0.012);
+  --pf-screen-radius: calc(var(--pf-width) * 0.008);
+}
+
+/* --- Width presets --- */
+
+.pf--sm {
+  --pf-width: 240px;
+}
+
+.pf--md {
+  --pf-width: 300px;
+}
+
+.pf--lg {
+  --pf-width: 380px;
+}
+
+/* --- Orientation --- */
+
+.pf-shell.pf--landscape {
+  --pf-ratio: 19.5 / 9;
+  transform: rotate(90deg);
+  transform-origin: center center;
+  margin: calc((var(--pf-width) * (19.5 / 9) - var(--pf-width)) / 2) auto;
+}
+
+/* --- Visual toggles --- */
+
+.pf--no-shadow {
+  --pf-shadow: none;
+}
+
+.pf-shell.pf--no-buttons::before,
+.pf-shell.pf--no-buttons::after,
+.pf--no-buttons.pf-buttons::before,
+.pf--no-buttons.pf-buttons::after {
+  display: none;
+}
