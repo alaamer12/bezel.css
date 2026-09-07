@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>bezel.css — phone-frames test</title>
   <link rel="stylesheet" href="dist/phone-frames.css">
+  <link rel="stylesheet" href="dist/devices.css">
   <style>
     * { box-sizing: border-box; }
     body {
@@ -106,7 +107,10 @@
     <button data-tab="iframe" role="tab">Iframe</button>
     <button data-tab="image" role="tab">Image</button>
     <button data-tab="statusbar" role="tab">Status Bar</button>
+    <button data-tab="safearea" role="tab">Safe Area</button>
+    <button data-tab="legacy" role="tab">Legacy</button>
     <button data-tab="apps" role="tab">Apps</button>
+    <button data-tab="icons-gallery" role="tab">Icons Gallery</button>
   </nav>
 
   <!-- Presets -->
@@ -302,10 +306,10 @@
       <div class="demo-wrap">
         <div class="pf-iphone-14-pro">
           <div class="pf-screen">
-            <div class="pf-status-bar">
+            <div class="pf-status-bar" style="color: #fff;">
               <span class="apps-statusbar-time">09:41</span>
               <div class="pf-status-bar__icons">
-                <span class="apps-statusbar-5g"></span>
+                <span class="apps-statusbar-wifi"></span>
                 <span class="apps-statusbar-sim"></span>
                 <span class="apps-statusbar-battery"></span>
               </div>
@@ -315,22 +319,21 @@
                 <h2>Status Bar Icons</h2>
                 <p>New utility classes for status bar components.</p>
                 <div class="sample-card">
-                  Manual control: 5G + SIM + Battery
+                  Manual control: SIM + Battery
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="demo-label">Custom Icons (5G, SIM)</div>
+        <div class="demo-label">Custom Icons (SIM)</div>
       </div>
 
       <div class="demo-wrap">
         <div class="pf-pixel-7">
           <div class="pf-screen">
-            <div class="pf-status-bar pf-status-bar--android">
+            <div class="pf-status-bar pf-status-bar--android" style="color: #fff;">
               <span class="apps-statusbar-time">10:30</span>
               <div class="pf-status-bar__icons">
-                <span class="apps-statusbar-4g"></span>
                 <span class="apps-statusbar-wifi"></span>
                 <span class="apps-statusbar-signal"></span>
                 <span class="apps-statusbar-battery"></span>
@@ -340,13 +343,374 @@
               <div class="sample-app">
                 <h2>Android Style</h2>
                 <div class="sample-card">
-                  4G + Wifi + Signal + Battery
+                  Wifi + Signal + Battery
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="demo-label">Android Style (4G, Wifi)</div>
+        <div class="demo-label">Android Style (24h)</div>
+      </div>
+
+      <div class="demo-wrap">
+        <div class="pf-iphone-14-pro">
+          <div class="pf-screen">
+            <div class="pf-status-bar pf-status-bar--12h" style="color: #fff;"></div>
+            <div class="pf-scroll-view">
+              <div class="sample-app">
+                <h2>12-hour Format</h2>
+                <p>Add <code>.pf-status-bar--12h</code> to enable 12h display with AM/PM.</p>
+                <div class="sample-card">
+                  Auto-fill: 12h + Wifi + Signal + Battery
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="demo-label">12h Auto-fill</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Safe Area -->
+  <section id="safearea" class="panel" role="tabpanel">
+    <div class="panel-inner" style="flex-direction: column; align-items: flex-start;">
+      
+      <h3>Modern pf-* Frames</h3>
+      <div style="display: flex; flex-wrap: wrap; gap: 2rem; width: 100%;">
+        <div class="demo-wrap">
+          <div class="pf-iphone-14-pro">
+            <div class="pf-screen pf-safe-area-view--vertical" style="background: #3b6ef5; display: flex; flex-direction: column;">
+              <div style="color: #fff; padding: 1rem; flex: 1;">
+                Island Aware
+              </div>
+            </div>
+          </div>
+          <div class="demo-label">iPhone 14 Pro</div>
+        </div>
+
+        <div class="demo-wrap">
+          <div class="pf-iphone-x">
+            <div class="pf-screen pf-safe-area-view--vertical" style="background: #f53b3b; display: flex; flex-direction: column;">
+              <div style="color: #fff; padding: 1rem; flex: 1;">
+                Notch Aware
+              </div>
+            </div>
+          </div>
+          <div class="demo-label">iPhone X</div>
+        </div>
+
+        <div class="demo-wrap">
+          <div class="pf-pixel-7">
+            <div class="pf-screen pf-safe-area-view--vertical" style="background: #3bf53b; display: flex; flex-direction: column;">
+              <div style="color: #000; padding: 1rem; flex: 1;">
+                Punchhole Aware
+              </div>
+            </div>
+          </div>
+          <div class="demo-label">Pixel 7</div>
+        </div>
+
+        <div class="demo-wrap">
+          <div class="pf-galaxy-s23">
+            <div class="pf-screen pf-safe-area-view--vertical" style="background: #f5a63b; display: flex; flex-direction: column;">
+              <div style="color: #000; padding: 1rem; flex: 1;">
+                Galaxy S23
+              </div>
+            </div>
+          </div>
+          <div class="demo-label">Galaxy S23</div>
+        </div>
+      </div>
+
+      <h3>Legacy Phones (Bridged)</h3>
+      <div style="display: flex; flex-wrap: wrap; gap: 2rem; width: 100%;">
+        <!-- Legacy iPhone 14 Pro -->
+        <div class="demo-wrap">
+          <div class="device-iphone-14-pro">
+            <div class="device-frame">
+              <div class="device-screen pf-safe-area-view--vertical" style="background: #3b6ef5;">
+                <div style="color: #fff; padding: 1rem;">Safe Area Test</div>
+              </div>
+            </div>
+          </div>
+          <div class="demo-label">Legacy: iPhone 14 Pro</div>
+        </div>
+        <!-- Legacy iPhone 14 -->
+        <div class="demo-wrap">
+          <div class="device-iphone-14">
+            <div class="device-frame">
+              <div class="device-screen pf-safe-area-view--vertical" style="background: #a5b4fc;">
+                <div style="color: #000; padding: 1rem;">Safe Area Test</div>
+              </div>
+            </div>
+          </div>
+          <div class="demo-label">Legacy: iPhone 14</div>
+        </div>
+        <!-- Legacy iPhone X -->
+        <div class="demo-wrap">
+          <div class="device-iphone-x">
+            <div class="device-frame">
+              <div class="device-screen pf-safe-area-view--vertical" style="background: #f53b3b;">
+                <div style="color: #fff; padding: 1rem;">Safe Area Test</div>
+              </div>
+            </div>
+          </div>
+          <div class="demo-label">Legacy: iPhone X</div>
+        </div>
+        <!-- Legacy iPhone 8 -->
+        <div class="demo-wrap">
+          <div class="device-iphone-8">
+            <div class="device-frame">
+              <div class="device-screen pf-safe-area-view--vertical" style="background: #94a3b8;">
+                <div style="color: #fff; padding: 1rem;">Safe Area Test</div>
+              </div>
+            </div>
+          </div>
+          <div class="demo-label">Legacy: iPhone 8</div>
+        </div>
+        <!-- Legacy iPhone -->
+        <div class="demo-wrap">
+          <div class="device-iphone">
+            <div class="device-frame">
+              <div class="device-screen pf-safe-area-view--vertical" style="background: #64748b;">
+                <div style="color: #fff; padding: 1rem;">Safe Area Test</div>
+              </div>
+            </div>
+          </div>
+          <div class="demo-label">Legacy: iPhone</div>
+        </div>
+        <!-- Legacy Pixel 6 Pro -->
+        <div class="demo-wrap">
+          <div class="device-google-pixel-6-pro">
+            <div class="device-frame">
+              <div class="device-screen pf-safe-area-view--vertical" style="background: #3bf53b;">
+                <div style="color: #000; padding: 1rem;">Safe Area Test</div>
+              </div>
+            </div>
+          </div>
+          <div class="demo-label">Legacy: Pixel 6 Pro</div>
+        </div>
+        <!-- Legacy Pixel 2 XL -->
+        <div class="demo-wrap">
+          <div class="device-google-pixel-2-xl">
+            <div class="device-frame">
+              <div class="device-screen pf-safe-area-view--vertical" style="background: #0d1b2a;">
+                <div style="color: #fff; padding: 1rem;">Safe Area Test</div>
+              </div>
+            </div>
+          </div>
+          <div class="demo-label">Legacy: Pixel 2 XL</div>
+        </div>
+        <!-- Legacy Pixel -->
+        <div class="demo-wrap">
+          <div class="device-google-pixel">
+            <div class="device-frame">
+              <div class="device-screen pf-safe-area-view--vertical" style="background: #1e293b;">
+                <div style="color: #fff; padding: 1rem;">Safe Area Test</div>
+              </div>
+            </div>
+          </div>
+          <div class="demo-label">Legacy: Pixel</div>
+        </div>
+        <!-- Legacy Galaxy S8 -->
+        <div class="demo-wrap">
+          <div class="device-galaxy-s8">
+            <div class="device-frame">
+              <div class="device-screen pf-safe-area-view--vertical" style="background: #0f172a;">
+                <div style="color: #fff; padding: 1rem;">Safe Area Test</div>
+              </div>
+            </div>
+          </div>
+          <div class="demo-label">Legacy: Galaxy S8</div>
+        </div>
+      </div>
+
+      <h3>Tablets & Computers</h3>
+      <div style="display: flex; flex-wrap: wrap; gap: 2rem; width: 100%;">
+        <div class="demo-wrap">
+          <div class="device-ipad-pro">
+            <div class="device-frame">
+              <div class="device-screen pf-safe-area-view--vertical" style="background: #444;">
+                <div style="color: #fff; padding: 1rem;">Safe Area Test</div>
+              </div>
+            </div>
+          </div>
+          <div class="demo-label">iPad Pro</div>
+        </div>
+        <div class="demo-wrap">
+          <div class="device-ipad-pro-2017">
+            <div class="device-frame">
+              <div class="device-screen pf-safe-area-view--vertical" style="background: #334155;">
+                <div style="color: #fff; padding: 1rem;">Safe Area Test</div>
+              </div>
+            </div>
+          </div>
+          <div class="demo-label">iPad Pro (2017)</div>
+        </div>
+        <div class="demo-wrap">
+          <div class="device-macbook-pro">
+            <div class="device-frame">
+              <div class="device-screen pf-safe-area-view--vertical" style="background: #222;">
+                <div style="color: #fff; padding: 1rem;">Safe Area Test</div>
+              </div>
+            </div>
+          </div>
+          <div class="demo-label">MacBook Pro</div>
+        </div>
+        <div class="demo-wrap">
+          <div class="device-macbook-pro-2018">
+            <div class="device-frame">
+              <div class="device-screen pf-safe-area-view--vertical" style="background: #0f172a;">
+                <div style="color: #fff; padding: 1rem;">Safe Area Test</div>
+              </div>
+            </div>
+          </div>
+          <div class="demo-label">MacBook Pro (2018)</div>
+        </div>
+        <div class="demo-wrap">
+          <div class="device-macbook">
+            <div class="device-frame">
+              <div class="device-screen pf-safe-area-view--vertical" style="background: #1e293b;">
+                <div style="color: #fff; padding: 1rem;">Safe Area Test</div>
+              </div>
+            </div>
+          </div>
+          <div class="demo-label">MacBook</div>
+        </div>
+        <div class="demo-wrap">
+          <div class="device-imac-pro">
+            <div class="device-frame">
+              <div class="device-screen pf-safe-area-view--vertical" style="background: #020617;">
+                <div style="color: #fff; padding: 1rem;">Safe Area Test</div>
+              </div>
+            </div>
+          </div>
+          <div class="demo-label">iMac Pro</div>
+        </div>
+        <div class="demo-wrap">
+          <div class="device-imac">
+            <div class="device-frame">
+              <div class="device-screen pf-safe-area-view--vertical" style="background: #0f172a;">
+                <div style="color: #fff; padding: 1rem;">Safe Area Test</div>
+              </div>
+            </div>
+          </div>
+          <div class="demo-label">iMac</div>
+        </div>
+        <div class="demo-wrap">
+          <div class="device-pro-display-xdr">
+            <div class="device-frame">
+              <div class="device-screen pf-safe-area-view--vertical" style="background: #000;">
+                <div style="color: #fff; padding: 1rem;">Safe Area Test</div>
+              </div>
+            </div>
+          </div>
+          <div class="demo-label">Pro Display XDR</div>
+        </div>
+        <div class="demo-wrap">
+          <div class="device-surface-book">
+            <div class="device-frame">
+              <div class="device-screen pf-safe-area-view--vertical" style="background: #1e293b;">
+                <div style="color: #fff; padding: 1rem;">Safe Area Test</div>
+              </div>
+            </div>
+          </div>
+          <div class="demo-label">Surface Book</div>
+        </div>
+        <div class="demo-wrap">
+          <div class="device-surface-pro-2017">
+            <div class="device-frame">
+              <div class="device-screen pf-safe-area-view--vertical" style="background: #334155;">
+                <div style="color: #fff; padding: 1rem;">Safe Area Test</div>
+              </div>
+            </div>
+          </div>
+          <div class="demo-label">Surface Pro (2017)</div>
+        </div>
+        <div class="demo-wrap">
+          <div class="device-surface-studio">
+            <div class="device-frame">
+              <div class="device-screen pf-safe-area-view--vertical" style="background: #0f172a;">
+                <div style="color: #fff; padding: 1rem;">Safe Area Test</div>
+              </div>
+            </div>
+          </div>
+          <div class="demo-label">Surface Studio</div>
+        </div>
+      </div>
+
+      <h3>Wearables & Others</h3>
+      <div style="display: flex; flex-wrap: wrap; gap: 2rem; width: 100%;">
+        <div class="demo-wrap">
+          <div class="device-apple-watch-ultra">
+            <div class="device-frame">
+              <div class="device-screen pf-safe-area-view--vertical" style="background: #f97316;">
+                <div style="color: #000; padding: 0.5rem; font-size: 0.5rem;">Safe Area</div>
+              </div>
+            </div>
+          </div>
+          <div class="demo-label">Apple Watch Ultra</div>
+        </div>
+        <div class="demo-wrap">
+          <div class="device-apple-watch-s8">
+            <div class="device-frame">
+              <div class="device-screen pf-safe-area-view--vertical" style="background: #0ea5e9;">
+                <div style="color: #000; padding: 0.5rem; font-size: 0.5rem;">Safe Area</div>
+              </div>
+            </div>
+          </div>
+          <div class="demo-label">Apple Watch S8</div>
+        </div>
+        <div class="demo-wrap">
+          <div class="device-homepod">
+            <div class="device-frame">
+              <div class="device-screen pf-safe-area-view--vertical" style="background: #64748b;">
+                <div style="color: #fff; padding: 0.5rem; font-size: 0.5rem;">Safe Area</div>
+              </div>
+            </div>
+          </div>
+          <div class="demo-label">HomePod</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Legacy -->
+  <section id="legacy" class="panel" role="tabpanel">
+    <div class="panel-inner">
+      <!-- Legacy iPhone X -->
+      <div class="demo-wrap">
+        <div class="device-iphone-x">
+          <div class="device-frame">
+            <div class="device-screen pf-safe-area-view--vertical" style="background: #111;">
+              <iframe src="iframe.html" title="Legacy iPhone X" style="width:100%;height:100%;border:0;display:block;"></iframe>
+            </div>
+            <div class="device-stripe"></div>
+            <div class="device-header"></div>
+            <div class="device-sensors"></div>
+            <div class="device-btns"></div>
+            <div class="device-power"></div>
+          </div>
+        </div>
+        <div class="demo-label">Legacy: .device-iphone-x</div>
+      </div>
+
+      <!-- Legacy Pixel 2 XL -->
+      <div class="demo-wrap">
+        <div class="device-google-pixel-2-xl">
+          <div class="device-frame">
+            <div class="device-screen" style="background: #0d1b2a;">
+              <iframe src="iframe.html" title="Legacy Pixel 2 XL" style="width:100%;height:100%;border:0;display:block;"></iframe>
+            </div>
+            <div class="device-header"></div>
+            <div class="device-sensors"></div>
+            <div class="device-btns"></div>
+            <div class="device-power"></div>
+          </div>
+        </div>
+        <div class="demo-label">Legacy: .device-google-pixel-2-xl</div>
       </div>
     </div>
   </section>
@@ -356,28 +720,28 @@
     <div class="panel-inner">
       <div class="demo-wrap">
         <div class="pf-iphone-14-pro">
-          <div class="pf-screen" style="background: linear-gradient(180deg, #1a1a1a 0%, #000 100%);">
+          <div class="pf-screen" style="background: linear-gradient(180deg, #1a1a1a 0%, #000 100%); color: #fff;">
             <div class="pf-status-bar"></div>
             <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; padding: 20px;">
               <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
-                <span class="apps-icon apps-icon--ios apps-icon-phone"></span>
-                <span style="font-size: 10px; color: #fff;">Phone</span>
+                <span class="apps-icon apps-icon--ios apps-icon-apple"></span>
+                <span style="font-size: 10px; color: #fff;">Apple</span>
               </div>
               <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
-                <span class="apps-icon apps-icon--ios apps-icon-messages"></span>
-                <span style="font-size: 10px; color: #fff;">Messages</span>
+                <span class="apps-icon apps-icon--ios apps-icon-gemini"></span>
+                <span style="font-size: 10px; color: #fff;">Gemini</span>
               </div>
               <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
                 <span class="apps-icon apps-icon--ios apps-icon-safari"></span>
                 <span style="font-size: 10px; color: #fff;">Safari</span>
               </div>
               <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
-                <span class="apps-icon apps-icon--ios apps-icon-photos"></span>
-                <span style="font-size: 10px; color: #fff;">Photos</span>
+                <span class="apps-icon apps-icon--ios apps-icon-google-drive"></span>
+                <span style="font-size: 10px; color: #fff;">Drive</span>
               </div>
               <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
-                <span class="apps-icon apps-icon--ios apps-icon-settings"></span>
-                <span style="font-size: 10px; color: #fff;">Settings</span>
+                <span class="apps-icon apps-icon--ios apps-icon-gmail"></span>
+                <span style="font-size: 10px; color: #fff;">Gmail</span>
               </div>
             </div>
           </div>
@@ -387,7 +751,7 @@
 
       <div class="demo-wrap">
         <div class="pf-pixel-7">
-          <div class="pf-screen" style="background: #202124;">
+          <div class="pf-screen" style="background: #202124; color: #fff;">
             <div class="pf-status-bar pf-status-bar--android"></div>
             <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; padding: 20px;">
               <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
@@ -418,6 +782,44 @@
     </div>
   </section>
 
+  <!-- Icons Gallery -->
+  <section id="icons-gallery" class="panel" role="tabpanel">
+    <div class="panel-inner" style="flex-direction: column; align-items: center;">
+      <h2 style="color: #fff; margin-bottom: 2rem;">Status Bar Icons (Large)</h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; background: #1a1e26; padding: 40px; border-radius: 16px; width: 100%;">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+          <span class="apps-statusbar-wifi" style="width: 1.5em; height: 1.5em; color: #3b6ef5; border: 1px solid rgba(255,255,255,0.1); transform: scale(3);"></span>
+          <span style="font-size: 14px; color: #9aa0a6;">Wifi</span>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+          <span class="apps-statusbar-signal" style="width: 1.5em; height: 1.5em; color: #3b6ef5; border: 1px solid rgba(255,255,255,0.1); transform: scale(3);"></span>
+          <span style="font-size: 14px; color: #9aa0a6;">Signal</span>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+          <span class="apps-statusbar-battery" style="width: 1.5em; height: 1.5em; color: #3b6ef5; border: 1px solid rgba(255,255,255,0.1); transform: scale(3);"></span>
+          <span style="font-size: 14px; color: #9aa0a6;">Battery</span>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+          <span class="apps-statusbar-sim" style="width: 1.5em; height: 1.5em; color: #3b6ef5; border: 1px solid rgba(255,255,255,0.1); transform: scale(3);"></span>
+          <span style="font-size: 14px; color: #9aa0a6;">SIM</span>
+        </div>
+      </div>
+
+      <h2 style="color: #fff; margin-top: 4rem; margin-bottom: 2rem;">App Icons (Large)</h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; background: #1a1e26; padding: 40px; border-radius: 16px; width: 100%;">
+        <span class="apps-icon apps-icon--ios apps-icon-apple" style="width: 96px; height: 96px;"></span>
+        <span class="apps-icon apps-icon--ios apps-icon-gemini" style="width: 96px; height: 96px;"></span>
+        <span class="apps-icon apps-icon--ios apps-icon-safari" style="width: 96px; height: 96px;"></span>
+        <span class="apps-icon apps-icon--android apps-icon-google" style="width: 96px; height: 96px;"></span>
+        <span class="apps-icon apps-icon--android apps-icon-maps" style="width: 96px; height: 96px;"></span>
+        <span class="apps-icon apps-icon--android apps-icon-gmail" style="width: 96px; height: 96px;"></span>
+        <span class="apps-icon apps-icon--android apps-icon-youtube" style="width: 96px; height: 96px;"></span>
+        <span class="apps-icon apps-icon--android apps-icon-playstore" style="width: 96px; height: 96px;"></span>
+        <span class="apps-icon apps-icon--android apps-icon-google-drive" style="width: 96px; height: 96px;"></span>
+      </div>
+    </div>
+  </section>
+
   <script>
     document.querySelectorAll('.tabs button').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -437,7 +839,7 @@
       btn.classList.add('active');
       const panel = document.getElementById(tab);
       if (panel) panel.classList.add('active');
-      if (tab === 'iframe') {
+      if (tab === 'iframe' || tab === 'legacy') {
         if (typeof window.scaleAllIframes === 'function') {
           window.scaleAllIframes();
         }

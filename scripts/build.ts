@@ -1,6 +1,6 @@
 import * as sass from "sass";
 import CleanCSS from "clean-css";
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync, cpSync } from "fs";
 import { join } from "path";
 
 const ROOT = join(import.meta.dir, "..");
@@ -49,6 +49,14 @@ function buildPhoneFrames() {
   writeFileSync(join(DIST, "phone-frames.css"), css);
   writeFileSync(join(DIST, "phone-frames.min.css"), minify(css));
   console.log("[build:pf] dist/phone-frames.css");
+
+  // Copy assets
+  const assetsSrc = join(SRC, "assets");
+  const assetsDist = join(DIST, "assets");
+  if (existsSync(assetsSrc)) {
+    cpSync(assetsSrc, assetsDist, { recursive: true });
+    console.log("[build:pf] assets copied to dist/assets");
+  }
 }
 
 function buildDevices() {

@@ -1,43 +1,32 @@
 (function () {
   "use strict";
 
-  var WIFI_SVG =
-    '<svg class="pf-status-bar__wifi" width="18" height="13" viewBox="0 0 18 13" aria-hidden="true">' +
-    '<path d="M9 13C10.1 13 11 12.1 11 11C11 9.9 10.1 9 9 9C7.9 9 7 9.9 7 11C7 12.1 7.9 13 9 13Z" fill="currentColor"/>' +
-    '<path d="M15 7.5C13.4 5.9 11.3 5 9 5C6.7 5 4.6 5.9 3 7.5L1.5 6C3.4 4.1 6.1 3 9 3C11.9 3 14.6 4.1 16.5 6L15 7.5Z" fill="currentColor"/>' +
-    '<path d="M18 4.5C15.5 2 12.4 0.5 9 0.5C5.6 0.5 2.5 2 0 4.5L1.5 6C3.6 3.9 6.1 2.5 9 2.5C11.9 2.5 14.4 3.9 16.5 6L18 4.5Z" fill="currentColor"/>' +
-    "</svg>";
+  var TICK_INTERVAL = 1000; // Check every second for better sync
 
-  var SIGNAL_SVG =
-    '<svg class="pf-status-bar__signal" width="18" height="12" viewBox="0 0 18 12" aria-hidden="true">' +
-    '<rect x="0" y="8" width="3" height="4" rx="0.5" fill="currentColor"/>' +
-    '<rect x="5" y="5" width="3" height="7" rx="0.5" fill="currentColor"/>' +
-    '<rect x="10" y="2" width="3" height="10" rx="0.5" fill="currentColor"/>' +
-    '<rect x="15" y="0" width="3" height="12" rx="0.5" fill="currentColor"/>' +
-    "</svg>";
-
-  var BATTERY_SVG =
-    '<svg class="pf-status-bar__battery" width="27" height="13" viewBox="0 0 27 13" aria-hidden="true">' +
-    '<rect x="0.5" y="0.5" width="22" height="12" rx="2.5" fill="none" stroke="currentColor"/>' +
-    '<rect x="2.5" y="2.5" width="16" height="8" rx="1.5" fill="currentColor"/>' +
-    '<rect x="23.5" y="4" width="2.5" height="5" rx="1" fill="currentColor"/>' +
-    "</svg>";
-
-  function formatTime(date) {
+  function formatTime(date, is12h) {
     var h = date.getHours();
     var m = date.getMinutes();
-    return (h < 10 ? "0" : "") + h + ":" + (m < 10 ? "0" : "") + m;
+    var ampm = "";
+
+    if (is12h) {
+      ampm = h >= 12 ? " PM" : " AM";
+      h = h % 12;
+      h = h ? h : 12;
+    }
+
+    return (h < 10 && !is12h ? "0" : "") + h + ":" + (m < 10 ? "0" : "") + m + ampm;
   }
 
   function fillBar(bar) {
-    if (bar.children.length > 0) return;
-    
-    // If user provided manual icons via classes, don't auto-fill
+    if (!bar || bar.children.length > 0) return;
     if (bar.querySelector('[class*="apps-statusbar-"]')) return;
+
+    var is12h = bar.classList.contains("pf-status-bar--12h");
+    var now = new Date();
 
     bar.innerHTML =
       '<span class="pf-status-bar__time apps-statusbar-time">' +
-      formatTime(new Date()) +
+      formatTime(now, is12h) +
       "</span>" +
       '<span class="pf-status-bar__icons">' +
       '<span class="apps-statusbar-wifi"></span>' +
@@ -47,14 +36,52 @@
   }
 
   function tick() {
+    var now = new Date();
     document.querySelectorAll(".pf-status-bar__time, .apps-statusbar-time").forEach(function (el) {
-      el.textContent = formatTime(new Date());
+      var bar = el.closest(".pf-status-bar");
+      var is12h = bar ? bar.classList.contains("pf-status-bar--12h") : false;
+      var newTime = formatTime(now, is12h);
+      if (el.textContent !== newTime) {
+        el.textContent = newTime;
+      }
     });
   }
 
   function init() {
+    // 1. Initial fill
     document.querySelectorAll(".pf-status-bar:empty").forEach(fillBar);
-    setInterval(tick, 60000);
+
+    // 2. Reliable Clock Sync
+    // We check every second to see if the minute has changed. 
+    // This is more reliable than a 60s interval which drifts and doesn't align with system clock.
+    setInterval(tick, TICK_INTERVAL);
+    tick(); // Run once immediately
+
+    // 3. MutationObserver for dynamic content
+    if (typeof MutationObserver !== "undefined") {
+      var observer = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+          mutation.addedNodes.forEach(function (node) {
+            if (node.nodeType !== 1) return;
+            
+            // Check if the added node is a status bar
+            if (node.matches && node.matches(".pf-status-bar:empty")) {
+              fillBar(node);
+            }
+            
+            // Or if it contains a status bar
+            if (node.querySelectorAll) {
+              node.querySelectorAll(".pf-status-bar:empty").forEach(fillBar);
+            }
+          });
+        });
+      });
+
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true
+      });
+    }
   }
 
   if (document.readyState === "loading") {

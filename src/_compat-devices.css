@@ -10,3 +10,58 @@
  *
  * phone-frames uses the pf-* namespace only; no .device rules are re-exported here.
  */
+
+/* 
+ * Bridge: Apply pf-* logic to legacy selectors 
+ */
+
+.device-screen {
+  position: relative;
+  overflow: hidden;
+  /* Support native scrollbars via overlay */
+  overflow-y: overlay;
+}
+
+/* Ensure iframes in legacy shells scale correctly */
+.device-screen > iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+/* 
+ * Safe Area Definitions for Legacy Devices 
+ * Note: Legacy frames use fixed pixel widths, so we map their safe areas accordingly.
+ */
+
+.device-iphone-x {
+  /* Notch height is 30px, margin 2% of screen width (375px) = ~7.5px. Total ~37.5px */
+  --pf-safe-area-top: 37.5px;
+  --pf-safe-area-bottom: 20px;
+}
+
+.device-iphone-14-pro {
+  /* Island top 29px + height 35px = 64px. Margin 2% of screen width (390px) = 7.8px. Total ~72px */
+  --pf-safe-area-top: 72px;
+  --pf-safe-area-bottom: 20px;
+}
+
+/* Android legacy devices generally have status bars around 24px-30px */
+.device-google-pixel-2-xl,
+.device-google-pixel-6-pro,
+.device-google-pixel,
+.device-galaxy-s8 {
+  --pf-safe-area-top: 28px;
+  --pf-safe-area-bottom: 0px;
+}
+
+/* Map .pf-safe-area-view--vertical to legacy .device-screen */
+.device-screen.pf-safe-area-view--vertical {
+  padding-top: var(--pf-safe-area-top, 0);
+  padding-bottom: var(--pf-safe-area-bottom, 0);
+  box-sizing: border-box;
+}

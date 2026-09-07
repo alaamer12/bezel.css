@@ -57,6 +57,19 @@
   border-radius: 0;
 }
 
+/* Safe Area View Utilities */
+.pf-safe-area-view--horizontal {
+  /* Revert the overflow:visible and border-radius:0 fix from the "last edit" 
+     to allow standard horizontal containment */
+  overflow: hidden !important;
+  border-radius: inherit !important;
+}
+
+.pf-safe-area-view--vertical {
+  padding-top: var(--pf-safe-area-top, env(safe-area-inset-top, 0));
+  padding-bottom: var(--pf-safe-area-bottom, env(safe-area-inset-bottom, 0));
+}
+
 /* Disable inner shell shadow when hosting an iframe to prevent dark line artifacts */
 .pf-shell:has(.pf-screen > iframe),
 .pf-iphone-14-pro:has(.pf-screen > iframe),
@@ -78,11 +91,11 @@
   display: block;
   position: absolute;
   z-index: 10;
-  top: calc(var(--pf-width) * 0.028);
+  top: var(--pf-island-top);
   left: 50%;
   transform: translateX(-50%);
   width: calc(var(--pf-width) * 0.28);
-  height: calc(var(--pf-width) * 0.082);
+  height: var(--pf-island-height);
   border-radius: calc(var(--pf-width) * 0.041);
   background: var(--pf-island-color);
   pointer-events: none;
@@ -90,7 +103,7 @@
 
 .pf-shell > .pf-island {
   margin: 0;
-  top: calc(var(--pf-bezel) + var(--pf-width) * 0.028);
+  top: calc(var(--pf-bezel) + var(--pf-island-top));
 }
 
 /* Camera lens dot inside island */
@@ -99,7 +112,7 @@
   content: "";
   position: absolute;
   z-index: 11;
-  top: calc(var(--pf-width) * 0.052);
+  top: calc(var(--pf-island-height) * 0.29);
   left: 50%;
   transform: translateX(calc(var(--pf-width) * 0.042));
   width: calc(var(--pf-width) * 0.021);
@@ -130,7 +143,7 @@
   left: 50%;
   transform: translateX(-50%);
   width: calc(var(--pf-width) * 0.476);
-  height: calc(var(--pf-width) * 0.07);
+  height: var(--pf-notch-height);
   border-bottom-left-radius: calc(var(--pf-width) * 0.047);
   border-bottom-right-radius: calc(var(--pf-width) * 0.047);
   background: var(--pf-island-color);
@@ -147,7 +160,7 @@
   content: "";
   position: absolute;
   z-index: 11;
-  top: calc(var(--pf-width) * 0.023);
+  top: calc(var(--pf-notch-height) * 0.33);
   left: 50%;
   transform: translateX(calc(var(--pf-width) * 0.098));
   width: calc(var(--pf-width) * 0.023);
@@ -172,10 +185,10 @@
   display: block;
   position: absolute;
   z-index: 10;
-  top: calc(var(--pf-bezel) * 0.4 + var(--pf-width) * 0.028);
+  top: calc(var(--pf-bezel) * 0.4 + var(--pf-punchhole-top));
   left: calc(var(--pf-bezel) + var(--pf-width) * 0.065);
-  width: calc(var(--pf-width) * 0.033);
-  height: calc(var(--pf-width) * 0.033);
+  width: var(--pf-punchhole-height);
+  height: var(--pf-punchhole-height);
   border-radius: 50%;
   background:
     radial-gradient(circle at 30% 30%, #6074bf 0%, transparent 45%),

@@ -9,6 +9,15 @@
   --pf-frame-color: #1a1a1a;
   --pf-btn-color: #5c5854;
   --pf-island-color: #010101;
+  /* Geometry Variables */
+  --pf-island-top: calc(var(--pf-width) * 0.028);
+  --pf-island-height: calc(var(--pf-width) * 0.082);
+  --pf-notch-height: calc(var(--pf-width) * 0.07);
+  --pf-punchhole-top: calc(var(--pf-width) * 0.028);
+  --pf-punchhole-height: calc(var(--pf-width) * 0.033);
+  /* Safe Area Equations */
+  --pf-safe-area-top: calc(var(--pf-island-top) + var(--pf-island-height) - (var(--pf-width) * 0.06));
+  --pf-safe-area-bottom: calc(var(--pf-width) * 0.08);
   --pf-shadow:
     0 24px 48px -12px rgba(0, 0, 0, 0.4),
     0 8px 16px -8px rgba(0, 0, 0, 0.25),
@@ -28,6 +37,15 @@
   --pf-frame-color: #1a1a1a;
   --pf-btn-color: #5c5854;
   --pf-island-color: #010101;
+  /* Geometry Variables */
+  --pf-island-top: calc(var(--pf-width) * 0.028);
+  --pf-island-height: calc(var(--pf-width) * 0.082);
+  --pf-notch-height: calc(var(--pf-width) * 0.07);
+  --pf-punchhole-top: calc(var(--pf-width) * 0.028);
+  --pf-punchhole-height: calc(var(--pf-width) * 0.033);
+  /* Safe Area Equations */
+  --pf-safe-area-top: calc(var(--pf-island-top) + var(--pf-island-height) - (var(--pf-width) * 0.06));
+  --pf-safe-area-bottom: calc(var(--pf-width) * 0.08);
   --pf-shadow:
     0 24px 48px -12px rgba(0, 0, 0, 0.4),
     0 8px 16px -8px rgba(0, 0, 0, 0.25),
