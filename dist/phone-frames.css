@@ -99,18 +99,40 @@
   overflow: hidden;
   border-radius: var(--pf-screen-radius);
   background: #000;
-  display: block;
-}
-
-.pf-screen:is(.pf-screen--flex, :has(> :not(iframe, img, .pf-status-bar, .pf-scroll-view, .pf-tab-bar))) {
   display: flex;
   flex-direction: column;
 }
 
-.pf-screen:is(img) {
+.pf-screen:is(img, iframe) {
   display: block;
+}
+
+.pf-screen:is(img) {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   border: 0;
+}
+
+/* Image inside pf-screen viewport with safe area awareness */
+.pf-screen > img,
+.pf-screen-image {
+  width: 100%;
+  flex: 1 1 auto;
+  min-height: 0;
+  object-fit: cover;
+  object-position: top center;
+  border: 0;
+  display: block;
+}
+
+/* Crop pre-baked status bar from top of screenshot images */
+.pf-crop-top,
+.pf-screen--crop-top > img,
+.pf-screen--crop-statusbar > img,
+.pf-screen-image--crop-top {
+  margin-top: calc(-1 * var(--pf-safe-area-top, 44px));
+  height: calc(100% + var(--pf-safe-area-top, 44px));
 }
 
 .pf-screen:is(iframe),
@@ -138,8 +160,14 @@
 }
 
 .pf-safe-area-view--vertical {
-  padding-top: var(--pf-safe-area-top, env(safe-area-inset-top, 0));
+  padding-top: var(--pf-safe-area-top, 44px);
   padding-bottom: var(--pf-safe-area-bottom, env(safe-area-inset-bottom, 0));
+  box-sizing: border-box;
+}
+
+.pf-safe-area-view--top {
+  padding-top: var(--pf-safe-area-top, 44px);
+  box-sizing: border-box;
 }
 
 /* Disable inner shell shadow when hosting an iframe to prevent dark line artifacts */
@@ -413,12 +441,22 @@
   justify-content: space-between;
   height: 44px;
   min-height: 44px;
-  padding: env(safe-area-inset-top, 0) max(16px, env(safe-area-inset-right, 0)) 0 max(16px, env(safe-area-inset-left, 0));
+  padding: 0 max(16px, env(safe-area-inset-right, 0)) 0 max(16px, env(safe-area-inset-left, 0));
   box-sizing: border-box;
   position: relative;
-  z-index: 10;
+  z-index: 25;
   font-size: 14px;
   font-weight: 600;
+}
+
+/* Overlay status bar on top of image / video content */
+.pf-status-bar--overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  background: transparent;
 }
 
 .pf-status-bar__icons {

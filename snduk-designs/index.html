@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Snduk Google Play Screenshot Studio</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      background: #0b0e14;
+      color: #e2e8f0;
+      font-family: 'Alexandria', system-ui, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    header.studio-header {
+      width: 100%;
+      background: #111622;
+      border-bottom: 1px solid #1e2638;
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    .studio-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .studio-title h1 {
+      font-family: 'El Messiri', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff;
+      margin: 0;
+    }
+    .studio-badge {
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+
+    .studio-layout {
+      display: flex;
+      width: 100%;
+      max-width: 1700px;
+      gap: 32px;
+      padding: 32px;
+      align-items: flex-start;
+    }
+
+    /* Controls Sidebar */
+    .controls-panel {
+      width: 380px;
+      background: #151b28;
+      border: 1px solid #232c3f;
+      border-radius: 20px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .control-group label {
+      font-size: 14px;
+      font-weight: 600;
+      color: #94a3b8;
+    }
+
+    .control-group select,
+    .control-group input {
+      background: #0d121c;
+      border: 1px solid #283347;
+      border-radius: 10px;
+      padding: 10px 14px;
+      color: #fff;
+      font-family: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .control-group select:focus,
+    .control-group input:focus {
+      border-color: #3b82f6;
+    }
+
+    .btn-action {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 12px 20px;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.35);
+      transition: all 0.2s;
+    }
+    .btn-action:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45);
+    }
+
+    /* Preview Canvas Area */
+    .preview-stage {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .canvas-wrapper {
+      transform-origin: top center;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid #2a3449;
+    }
+
+    /* Preset Quick Nav */
+    .presets-bar {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .preset-btn {
+      background: #1c2436;
+      border: 1px solid #2e3a54;
+      color: #cbd5e1;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .preset-btn:hover, .preset-btn.active {
+      background: #3b82f6;
+      color: #fff;
+      border-color: #3b82f6;
+    }
+  </style>
+</head>
+<body>
+  <header class="studio-header">
+    <div class="studio-title">
+      <h1>صانع صور متجر جوجل بلاي — تطبيق صندوق</h1>
+      <span class="studio-badge">Google Play 810×1440</span>
+    </div>
+    <div class="presets-bar">
+      <a class="preset-btn active" href="templates/screen_1_blue_royal.html" target="_blank">نموذج 1: أزرق ملكي</a>
+      <a class="preset-btn" href="templates/screen_2_warm_cream.html" target="_blank">نموذج 2: كريمي فاخر</a>
+      <a class="preset-btn" href="templates/screen_3_emerald_chips.html" target="_blank">نموذج 3: زمردي مع بطاقات</a>
+      <a class="preset-btn" href="templates/screen_4_dark_titanium.html" target="_blank">نموذج 4: تيتانيوم ليلي</a>
+      <a class="preset-btn" href="templates/screen_5_sunset_hero.html" target="_blank">نموذج 5: غروب مميز</a>
+    </div>
+  </header>
+
+  <div class="studio-layout">
+    <!-- Interactive Controls -->
+    <aside class="controls-panel">
+      <h3 style="margin:0 0 8px; font-size:18px; color:#fff;">تخصيص التصميم</h3>
+      
+      <div class="control-group">
+        <label>ثيم الخلفية (Background Feeling)</label>
+        <select id="themeSelect">
+          <option value="theme-royal-blue">1. أزرق ملكي (Royal Tech Blue)</option>
+          <option value="theme-warm-cream">2. كريمي فاخر (Warm Luxury Cream)</option>
+          <option value="theme-emerald-wealth">3. زمردي مالي (Emerald Wealth)</option>
+          <option value="theme-dark-titanium">4. تيتانيوم داكن (Dark Obsidian)</option>
+          <option value="theme-sunset-glow">5. توهج الغروب (Sunset Amber)</option>
+        </select>
+      </div>
+
+      <div class="control-group">
+        <label>زاوية وموضع الهاتف (Perspective)</label>
+        <select id="perspectiveSelect">
+          <option value="stage-tilt-left">ميلان ثلاثي الأبعاد لليسار (3D Tilt Left)</option>
+          <option value="stage-center">مستقيم بالمنتصف (Straight Center)</option>
+          <option value="stage-tilt-right">ميلان لليمين (3D Tilt Right)</option>
+          <option value="stage-floating-chips">عائم مع بطاقات تفاعلية (Floating Chips)</option>
+          <option value="stage-bottom-hero">مقرب من الأسفل (Bottom Hero Zoom)</option>
+        </select>
+      </div>
+
+      <div class="control-group">
+        <label>طريقة ملاءمة الصورة (Image Fitting / Sizing)</label>
+        <select id="fitSelect">
+          <option value="fit-fill">الخيار 1: ملء الشاشة الكامل وتعديل الأبعاد (9:16 Exact Match)</option>
+          <option value="fit-contain">الخيار 2: احتواء كامل بدون أي قص (Contain Full)</option>
+          <option value="fit-cover">الخيار 3: تغطية مع قص الأطراف (Cover Crop)</option>
+        </select>
+      </div>
+
+      <div class="control-group">
+        <label>نسبة أبعاد الشاشة (Screen Aspect Ratio)</label>
+        <select id="aspectSelect">
+          <option value="9/16">9 : 16 (شاشات الهواتف القياسية / مطابقة للصورة)</option>
+          <option value="9/19.5">9 : 19.5 (شاشات آيفون الحديثة الطويلة)</option>
+          <option value="9/20">9 : 20 (شاشات أندرويد الطويلة)</option>
+        </select>
+      </div>
+
+      <div class="control-group">
+        <label>العنوان الرئيسي (Title)</label>
+        <input type="text" id="titleInput" value="اكتشف و قارن صناديق الاستثمار بسهولة">
+      </div>
+
+      <div class="control-group">
+        <label>الكلمة المميزة (Highlight)</label>
+        <input type="text" id="highlightInput" value="صناديق الاستثمار">
+      </div>
+
+      <div class="control-group">
+        <label>العنوان الفرعي (Subtitle)</label>
+        <input type="text" id="subtitleInput" value="أكثر من 250 صندوق استثماري مرخص في السعودية بين يديك">
+      </div>
+
+      <button class="btn-action" onclick="window.print()">🖨️ حفظ كملف / طباعة</button>
+      <div style="font-size:12px; color:#94a3b8; line-height:1.5;">
+        💡 لالتقاط الصور تلقائياً بدقة 810×1440 أو 1080×1920، شغّل السكريبت: <br>
+        <code style="color:#60a5fa; direction:ltr; display:inline-block;">python snduk-designs/capture_screenshots.py</code>
+      </div>
+    </aside>
+
+    <!-- Live Preview -->
+    <main class="preview-stage">
+      <div class="canvas-wrapper" style="transform: scale(0.65);">
+        <div id="liveCanvas" class="play-canvas theme-royal-blue">
+          <div class="bg-orb-1"></div>
+          <div class="bg-orb-2"></div>
+          <div class="bg-grid"></div>
+
+          <header class="screen-header">
+            <div class="tag-pill" id="liveTag">
+              <span class="dot"></span>
+              <span id="liveTagText">منصة صندوق الاستثمارية</span>
+            </div>
+            <h1 class="header-title" id="liveTitle">
+              اكتشف و قارن <span class="highlight" id="liveHighlight">صناديق الاستثمار</span> بسهولة
+            </h1>
+            <p class="header-subtitle" id="liveSubtitle">
+              أكثر من 250 صندوق استثماري مرخص في السعودية بين يديك
+            </p>
+          </header>
+
+          <main id="liveStage" class="stage-container stage-tilt-left">
+            <div id="liveFloatingLeft" class="floating-chip chip-pos-top-left" style="display:none;">
+              <div class="chip-icon">📈</div>
+              <div class="chip-text">
+                <span class="chip-title">+24.5%</span>
+                <span class="chip-sub">أعلى عائد سنوي</span>
+              </div>
+            </div>
+
+            <div class="device-mockup">
+              <div class="btn-volume-up"></div>
+              <div class="btn-volume-down"></div>
+              <div class="btn-power"></div>
+
+              <div class="device-screen-wrap">
+                <!-- Status Bar -->
+                <div class="mockup-status-bar">
+                  <span class="mockup-status-time">9:41</span>
+                  <div class="mockup-status-icons">
+                    <svg width="17" height="11" viewBox="0 0 17 11">
+                      <rect x="0" y="8" width="3" height="3" rx="0.5"/>
+                      <rect x="4.5" y="5.5" width="3" height="5.5" rx="0.5"/>
+                      <rect x="9" y="3" width="3" height="8" rx="0.5"/>
+                      <rect x="13.5" y="0" width="3" height="11" rx="0.5"/>
+                    </svg>
+                    <svg width="15" height="11" viewBox="0 0 15 11">
+                      <path d="M7.5 3C4.8 3 2.4 4.1 0.7 5.9L0 5.2C1.9 3.2 4.6 2 7.5 2C10.4 2 13.1 3.2 15 5.2L14.3 5.9C12.6 4.1 10.2 3 7.5 3Z"/>
+                      <path d="M7.5 6.5C5.7 6.5 4.1 7.2 2.9 8.4L2.2 7.7C3.6 6.3 5.5 5.5 7.5 5.5C9.5 5.5 11.4 6.3 12.8 7.7L12.1 8.4C10.9 7.2 9.3 6.5 7.5 6.5Z"/>
+                      <circle cx="7.5" cy="9.8" r="1.2"/>
+                    </svg>
+                    <svg width="22" height="11" viewBox="0 0 22 11">
+                      <rect x="0.5" y="0.5" width="18" height="10" rx="2.5" fill="none" stroke="currentColor" stroke-width="1"/>
+                      <rect x="2" y="2" width="13" height="7" rx="1.5" fill="currentColor"/>
+                      <path d="M20 3.5C20.6 3.5 21 3.9 21 4.5V6.5C21 7.1 20.6 7.5 20 7.5V3.5Z" fill="currentColor"/>
+                    </svg>
+                  </div>
+                </div>
+                <div class="dynamic-island">
+                  <div class="camera-lens"></div>
+                  <div class="sensor"></div>
+                </div>
+                <div class="screen-glare"></div>
+                <img class="screen-image" src="input/test1.jfif" alt="Snduk App Interface">
+              </div>
+            </div>
+
+            <div id="liveFloatingRight" class="floating-chip chip-pos-bottom-right" style="display:none;">
+              <div class="chip-icon">🛡️</div>
+              <div class="chip-text">
+                <span class="chip-title">مرخص 100%</span>
+                <span class="chip-sub">هيئة السوق المالية</span>
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const themeSelect = document.getElementById('themeSelect');
+    const perspectiveSelect = document.getElementById('perspectiveSelect');
+    const fitSelect = document.getElementById('fitSelect');
+    const aspectSelect = document.getElementById('aspectSelect');
+    const tagInput = document.getElementById('tagInput');
+    const titleInput = document.getElementById('titleInput');
+    const highlightInput = document.getElementById('highlightInput');
+    const subtitleInput = document.getElementById('subtitleInput');
+
+    const liveCanvas = document.getElementById('liveCanvas');
+    const liveStage = document.getElementById('liveStage');
+    const liveScreenWrap = document.querySelector('.device-screen-wrap');
+    const liveScreenImage = document.querySelector('.screen-image');
+    const liveTagText = document.getElementById('liveTagText');
+    const liveTitle = document.getElementById('liveTitle');
+    const liveSubtitle = document.getElementById('liveSubtitle');
+    const liveFloatingLeft = document.getElementById('liveFloatingLeft');
+    const liveFloatingRight = document.getElementById('liveFloatingRight');
+
+    function updateLive() {
+      // Theme
+      liveCanvas.className = 'play-canvas ' + themeSelect.value;
+
+      // Perspective
+      liveStage.className = 'stage-container ' + perspectiveSelect.value;
+      if (perspectiveSelect.value === 'stage-floating-chips') {
+        liveFloatingLeft.style.display = 'flex';
+        liveFloatingRight.style.display = 'flex';
+      } else {
+        liveFloatingLeft.style.display = 'none';
+        liveFloatingRight.style.display = 'none';
+      }
+
+      // Aspect Ratio & Fit
+      if (aspectSelect && liveScreenWrap) {
+        liveScreenWrap.style.aspectRatio = aspectSelect.value;
+      }
+      if (fitSelect && liveScreenImage) {
+        liveScreenImage.className = 'screen-image ' + fitSelect.value;
+      }
+
+      // Tag
+      liveTagText.textContent = tagInput.value;
+
+      // Title & Highlight
+      const rawTitle = titleInput.value;
+      const highlight = highlightInput.value;
+      if (highlight && rawTitle.includes(highlight)) {
+        const parts = rawTitle.split(highlight);
+        liveTitle.innerHTML = parts[0] + '<span class="highlight">' + highlight + '</span>' + parts.slice(1).join(highlight);
+      } else {
+        liveTitle.textContent = rawTitle;
+      }
+
+      // Subtitle
+      liveSubtitle.textContent = subtitleInput.value;
+    }
+
+    [themeSelect, perspectiveSelect, fitSelect, aspectSelect, tagInput, titleInput, highlightInput, subtitleInput].forEach(el => {
+      if (el) {
+        el.addEventListener('input', updateLive);
+        el.addEventListener('change', updateLive);
+      }
+    });
+
+    updateLive();
+  </script>
+</body>
+</html>
