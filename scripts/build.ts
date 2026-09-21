@@ -13,6 +13,7 @@ const PF_LAYERS = [
   "_modifiers.css",
   "_slots.css",
   "_presets.css",
+  "_3d.css",
   "_compat-devices.css",
 ];
 
