@@ -40,16 +40,17 @@ def main():
     print(f"[*] Started temporary HTTP server on {base_url}")
 
     templates = [
-        ("screen_1_blue_royal", "snduk-designs/templates/screen_1_blue_royal.html"),
-        ("screen_2_warm_cream", "snduk-designs/templates/screen_2_warm_cream.html"),
-        ("screen_3_emerald_chips", "snduk-designs/templates/screen_3_emerald_chips.html"),
-        ("screen_4_dark_titanium", "snduk-designs/templates/screen_4_dark_titanium.html"),
-        ("screen_5_sunset_hero", "snduk-designs/templates/screen_5_sunset_hero.html"),
+        ("screen_1_best_funds", "snduk-designs/templates/screen_1_best_funds.html"),
+        ("screen_2_fund_details", "snduk-designs/templates/screen_2_fund_details.html"),
+        ("screen_3_advanced_analysis", "snduk-designs/templates/screen_3_advanced_analysis.html"),
+        ("screen_4_smart_recommendations", "snduk-designs/templates/screen_4_smart_recommendations.html"),
+        ("screen_5_historical_prices", "snduk-designs/templates/screen_5_historical_prices.html"),
+        ("screen_6_competing_funds", "snduk-designs/templates/screen_6_competing_funds.html"),
+        ("screen_7_investor_community", "snduk-designs/templates/screen_7_investor_community.html"),
     ]
 
     output_dirs = [
         os.path.join(root_dir, "snduk-designs", "output", "screenshots"),
-        os.path.join(root_dir, "snduk-design", "output", "screenshots"),
     ]
 
     for d in output_dirs:

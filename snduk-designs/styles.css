@@ -58,6 +58,70 @@ body {
   background: linear-gradient(175deg, #6e96eb 0%, #4677db 22%, #1a4da8 50%, #0a2e73 80%, #051b47 100%);
   color: #ffffff;
 }
+
+/* 1b. Deep Midnight & Medium Blue (أزرق غامق جدا مع متوسط) */
+.theme-midnight-navy {
+  background: linear-gradient(180deg, #020914 0%, #051833 22%, #0b2b54 48%, #134680 75%, #0a2548 92%, #030d1a 100%);
+  color: #ffffff;
+}
+.theme-midnight-navy .bg-orb-1 {
+  position: absolute;
+  top: -80px;
+  right: -60px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(96, 197, 255, 0.32) 0%, rgba(20, 80, 180, 0.18) 50%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(50px);
+}
+.theme-midnight-navy .bg-orb-2 {
+  position: absolute;
+  bottom: 80px;
+  left: -100px;
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.22) 0%, rgba(2, 44, 94, 0.15) 60%, transparent 75%);
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(60px);
+}
+.theme-midnight-navy .header-title .highlight {
+  color: #67e8f9;
+  text-shadow: 0 0 25px rgba(103, 232, 249, 0.45);
+}
+
+/* 1c. Slate Gray with Cyan / Baby Blue (تدرجات الرمادي مع اللبني) */
+.theme-slate-cyan {
+  background: linear-gradient(180deg, #0d121a 0%, #17212e 24%, #253448 50%, #344660 76%, #1c2738 92%, #0e141c 100%);
+  color: #ffffff;
+}
+.theme-slate-cyan .bg-orb-1 {
+  position: absolute;
+  top: -80px;
+  right: -60px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(125, 211, 252, 0.28) 0%, rgba(56, 110, 180, 0.15) 50%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(50px);
+}
+.theme-slate-cyan .bg-orb-2 {
+  position: absolute;
+  bottom: 80px;
+  left: -100px;
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.2) 0%, rgba(15, 23, 42, 0.2) 60%, transparent 75%);
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(60px);
+}
+.theme-slate-cyan .header-title .highlight {
+  color: #7dd3fc;
+  text-shadow: 0 0 25px rgba(125, 211, 252, 0.45);
+}
 .theme-royal-blue .bg-orb-1 {
   position: absolute;
   top: -100px;
@@ -196,6 +260,23 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.screen-header.single-header {
+  max-width: 740px;
+  height: 283px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.screen-header.single-header .header-title {
+  font-size: 52px;
+  font-weight: 700;
+  line-height: 1.35;
+  margin-bottom: 0;
 }
 
 .tag-pill {
@@ -528,14 +609,14 @@ body {
 /* 5. Bottom Cropped Hero (Close-up detail / Half-phone view matching reference) */
 .stage-bottom-hero {
   align-items: flex-start;
-  margin-top: 10px;
+  margin-top: 16px;
 }
 
 .stage-bottom-hero .device-mockup {
   width: 660px;
   border-radius: 64px;
   padding: 16px;
-  transform: translateY(30px);
+  transform: translateY(50px);
   box-shadow: 
     0 0 0 2px #4a4f5c,
     0 0 0 6px #1c1f26,
@@ -546,6 +627,7 @@ body {
 
 .stage-bottom-hero .device-screen-wrap {
   border-radius: 50px;
+  min-height: 1200px;
 }
 
 .stage-bottom-hero .dynamic-island {
@@ -569,6 +651,15 @@ body {
   min-height: 100%;
   margin-top: -50px;
 }
+
+/* Individual fine-tuned safe area alignments per screen to ensure uniform header distance below Dynamic Island */
+.screen-crop-1 { margin-top: -75px !important; }
+.screen-crop-2 { margin-top: -65px !important; }
+.screen-crop-3 { margin-top: -55px !important; }
+.screen-crop-4 { margin-top: -55px !important; }
+.screen-crop-5 { margin-top: -45px !important; }
+.screen-crop-6 { margin-top: -50px !important; }
+.screen-crop-7 { margin-top: -80px !important; }
 
 /* ==========================================================================
    Floating Feature Chips / Cards
