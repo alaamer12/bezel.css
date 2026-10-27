@@ -20,24 +20,18 @@
     "pure-css"
   ],
   "scripts": {
-    "dev": "vite",
     "build": "bun run scripts/build.ts",
     "build:pf": "bun run scripts/build.ts --pf",
     "build:devices": "bun run scripts/build.ts --devices"
   },
   "devDependencies": {
     "clean-css": "^5.3.3",
-    "sass": "^1.101.0",
-    "vite": "^5.0.0"
+    "sass": "^1.101.0"
   },
   "browserslist": [
     "last 2 Chrome versions",
     "last 2 Firefox versions",
     "last 2 Safari versions",
     "last 2 Edge versions"
-  ],
-  "dependencies": {
-    "@types/jsdom": "^28.0.3",
-    "jsdom": "^29.1.1"
-  }
+  ]
 }
