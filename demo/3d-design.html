@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>bezel.css · 3D design studio</title>
+  <link rel="stylesheet" href="../dist/phone-frames.css">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; color: #e7edf0; background: #0b1117; font: 15px/1.5 system-ui, sans-serif; }
+    main { max-width: 1160px; margin: auto; min-height: 100svh; padding: 36px; display: grid; grid-template-columns: 1fr 340px; align-items: center; gap: 40px; }
+    .stage { min-width: 0; min-height: 720px; display: grid; place-items: center; position: relative; background: radial-gradient(ellipse at center, #23313a, #0b1117 68%); }
+    .stage::after { content: ""; position: absolute; z-index: 0; bottom: 32px; width: 260px; height: 35px; border-radius: 50%; background: #0009; filter: blur(15px); pointer-events: none; }
+    .rotation-area { position: relative; z-index: 1; padding: 42px; cursor: grab; touch-action: none; transform-style: preserve-3d; zoom: var(--preview-scale, 1); }
+    .rotation-area:active { cursor: grabbing; }
+    .rotation-area:focus-visible { outline: 2px solid #67dce5; outline-offset: 12px; border-radius: 30px; }
+    .eyebrow { color: #6ce0e6; text-transform: uppercase; letter-spacing: .2em; font-size: 12px; font-weight: 600; }
+    h1 { font-size: clamp(32px, 4vw, 48px); line-height: 1.08; letter-spacing: -.04em; margin: 14px 0 20px; }
+    p { color: #aebbc4; }
+    .controls { border-top: 1px solid #35414a; margin-top: 28px; padding-top: 20px; }
+    label { display: flex; justify-content: space-between; margin-top: 14px; }
+    input { width: 100%; min-height: 44px; accent-color: #6ce0e6; }
+    button, .source { min-height: 44px; padding: 10px 14px; border: 1px solid #46545e; border-radius: 8px; color: #e7edf0; background: #19252e; font: inherit; cursor: pointer; }
+    button:hover { background: #2c414c; }
+    button:focus-visible, a:focus-visible { outline: 2px solid #6ce0e6; outline-offset: 3px; }
+    .buttons { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    button[aria-pressed="true"] { color: #07151a; background: #6ce0e6; }
+    .note { font-size: 12px; margin-top: 22px; }
+    .source { display: inline-block; background: transparent; text-decoration: none; }
+    /* Source artwork is 810 × 1440; its visible display starts at (91, 302). */
+    .stock-screen > img { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; transform: scale(1.22); }
+    .back-wordmark { position: absolute; inset: 48% 0 auto; text-align: center; color: #abb5b3; font-size: 24px; letter-spacing: .18em; }
+    .back-caption { position: absolute; bottom: 45px; width: 100%; text-align: center; color: #8e9998; font-size: 8px; letter-spacing: .2em; }
+    select { width: 100%; min-height: 44px; margin: 8px 0 0; padding: 10px; border: 1px solid #46545e; border-radius: 8px; background: #19252e; color: #e7edf0; font: inherit; }
+    .stock-preview { height: 100%; display: flex; align-items: center; justify-content: center; gap: 18px; padding: 20px; background: #e7f0f2; color: #122631; font-family: system-ui, sans-serif; }
+    .stock-preview .stock-screen { position: relative; width: 190px; height: 344px; flex: none; overflow: hidden; border-radius: 14px; box-shadow: 0 0 0 1px #aebfc4; }
+    .stock-details { font-size: 13px; text-align: start; }
+    .stock-details strong { display: block; color: #087565; font-size: 23px; margin: 16px 0; }
+    .stock-details p { color: #344e58; }
+    .pf-3d-tablet .stock-preview { flex-direction: column; gap: 8px; padding: 12px; }
+    .pf-3d-tablet .stock-details { display: flex; align-items: center; gap: 16px; }
+    .pf-3d-tablet .stock-details p { max-width: 120px; font-size: 10px; }
+    .pf-3d-laptop .stock-preview { gap: 30px; padding: 12px; }
+    .pf-3d-laptop .stock-screen { width: 125px; height: 226px; }
+    .watch-ui { padding: 12px 10px; background: #050c10; color: #e5f1f3; height: 100%; font: 11px/1.4 system-ui, sans-serif; text-align: center; }
+    .watch-ui time { display: block; text-align: right; font-size: 11px; color: #b4c4ca; }
+    .watch-ui strong { display: block; color: #6ce0e6; font-size: 24px; margin: 6px 0; }
+    .watch-ui .gain { color: #72d7a8; font-size: 13px; }
+    .watch-ui svg { width: 100%; height: 20px; margin-top: 7px; }
+    .watch-ui small { color: #97afb8; font-size: 8px; }
+    @media (max-width: 800px) { main { grid-template-columns: 1fr; gap: 0; padding: 20px; } .stage { min-height: 680px; } aside { max-width: 480px; width: 100%; margin: auto; padding-bottom: 30px; } }
+    @media (max-width: 400px) { .stage { min-height: 620px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="stage pf-3d-scene" aria-label="3D device preview">
+      <div class="rotation-area" tabindex="0" role="group" aria-label="Rotate device with arrow keys or drag" aria-describedby="rotation-help">
+        <div class="pf-3d pf-3d-solid" id="phone" data-pf-solid="300,560,42,24">
+          <div class="pf-3d-face pf-3d-front">
+            <div class="pf-3d-display stock-screen">
+              <img src="https://raw.githubusercontent.com/vinothvino42/Mobile-Banking-App-UI/master/screenshots/analytics.png" alt="Mobile banking analytics app UI design" draggable="false" onerror="this.style.background='linear-gradient(180deg,#1e3c72,#2a5298)'">
+            </div>
+          </div>
+          <div class="pf-3d-face pf-3d-back" aria-hidden="true">
+            <div class="pf-3d-camera pf-3d-solid" data-pf-solid="118,126,28,10">
+              <div class="pf-3d-face pf-3d-front">
+                <div class="pf-3d-lens pf-3d-solid" style="left: 9px; top: 9px" data-pf-solid="46,46,23,8"><div class="pf-3d-face pf-3d-front"></div><div class="pf-3d-face pf-3d-back"></div></div>
+                <div class="pf-3d-lens pf-3d-solid" style="left: 9px; top: 70px" data-pf-solid="46,46,23,8"><div class="pf-3d-face pf-3d-front"></div><div class="pf-3d-face pf-3d-back"></div></div>
+                <div class="pf-3d-lens pf-3d-solid" style="left: 65px; top: 40px" data-pf-solid="46,46,23,8"><div class="pf-3d-face pf-3d-front"></div><div class="pf-3d-face pf-3d-back"></div></div>
+                <i class="pf-3d-flash" style="left: 79px; top: 13px"></i>
+                <i class="pf-3d-sensor" style="left: 79px; top: 98px"></i>
+              </div>
+              <div class="pf-3d-face pf-3d-back"></div>
+            </div>
+            <span class="back-wordmark">bezel.</span>
+            <span class="back-caption">BEZEL / TITANIUM STUDY</span>
+          </div>
+          <div class="pf-3d-button pf-3d-solid" style="left: 296px; top: 160px; transform: rotateY(90deg)" data-pf-solid="8,62,4,4"><div class="pf-3d-face pf-3d-front"></div><div class="pf-3d-face pf-3d-back"></div></div>
+          <div class="pf-3d-button pf-3d-solid" style="left: -4px; top: 101px; transform: rotateY(-90deg)" data-pf-solid="8,22,4,4"><div class="pf-3d-face pf-3d-front"></div><div class="pf-3d-face pf-3d-back"></div></div>
+          <div class="pf-3d-button pf-3d-solid" style="left: -4px; top: 148px; transform: rotateY(-90deg)" data-pf-solid="8,43,4,4"><div class="pf-3d-face pf-3d-front"></div><div class="pf-3d-face pf-3d-back"></div></div>
+          <div class="pf-3d-button pf-3d-solid" style="left: -4px; top: 205px; transform: rotateY(-90deg)" data-pf-solid="8,43,4,4"><div class="pf-3d-face pf-3d-front"></div><div class="pf-3d-face pf-3d-back"></div></div>
+          <i class="pf-3d-port" style="left: 133px; top: 555.7px; transform: rotateX(-90deg)" aria-hidden="true"></i>
+          <i class="pf-3d-speaker" style="left: 73px; top: 557.7px; transform: rotateX(-90deg)" aria-hidden="true"></i>
+          <i class="pf-3d-speaker" style="left: 185px; top: 557.7px; transform: rotateX(-90deg)" aria-hidden="true"></i>
+          <i class="pf-3d-antenna" style="left: -12.2px; top: 70px; transform: rotateY(-90deg)" aria-hidden="true"></i>
+          <i class="pf-3d-antenna" style="left: 288.2px; top: 480px; transform: rotateY(90deg)" aria-hidden="true"></i>
+        </div>
+      </div>
+    </section>
+    <aside>
+      <span class="eyebrow">bezel.css / 3D design studio</span>
+      <h1>A new dimension<br>for your portfolio.</h1>
+      <p id="device-description" aria-live="polite">Titanium phone · triple cameras, side buttons, and charging port.</p>
+      <label for="device-model">Device model</label>
+      <select id="device-model">
+        <option value="phone">Phone · Titanium</option>
+        <option value="tablet">Tablet · iPad Pro style</option>
+        <option value="watch">Watch · Apple Watch Ultra style</option>
+        <option value="laptop">Laptop · MacBook Pro style</option>
+      </select>
+      <p id="rotation-help">Drag the device to explore, use arrow keys, or set an angle below.</p>
+      <div class="controls">
+        <label for="yaw">Rotation <output id="yaw-value">−28°</output></label>
+        <input id="yaw" type="range" min="-180" max="180" value="-28">
+        <label for="pitch">Tilt <output id="pitch-value">−12°</output></label>
+        <input id="pitch" type="range" min="-70" max="70" value="-12">
+        <div class="buttons">
+          <button type="button" data-view="0,0">Front</button>
+          <button type="button" data-view="180,-12">Back</button>
+          <button type="button" data-view="-90,0">Edge</button>
+          <button type="button" data-view="-28,55">Ports</button>
+          <button type="button" data-view="-28,-12">Reset</button>
+          <button type="button" id="spin" aria-pressed="false">Auto rotate</button>
+        </div>
+      </div>
+      <p class="note">CSS 3D concepts, not manufacturer CAD models. Phone, tablet, and laptop use the supplied artwork’s visible screen (the original bottom is cut off). Watch content is an adapted static summary, not a live app.</p>
+      <a class="source" href="https://github.com/vinothvino42/Mobile-Banking-App-UI">View original artwork ↗</a>
+      <noscript><p>Enable JavaScript for device selection, rounded sidewalls, and rotation controls. The phone screen remains visible without it.</p></noscript>
+    </aside>
+  </main>
+  <template id="tablet-model">
+    <div class="pf-3d-face pf-3d-front">
+      <div class="pf-3d-display" data-stock-preview></div><i class="pf-3d-webcam"></i>
+    </div>
+    <div class="pf-3d-face pf-3d-back" aria-hidden="true">
+      <div class="pf-3d-camera pf-3d-solid" data-pf-solid="62,76,15,8" style="transform: translateZ(4px)">
+        <div class="pf-3d-face pf-3d-front">
+          <div class="pf-3d-lens pf-3d-solid" style="left: 9px; top: 7px" data-pf-solid="32,32,16,5"><div class="pf-3d-face pf-3d-front"></div><div class="pf-3d-face pf-3d-back"></div></div>
+          <i class="pf-3d-flash" style="left: 30px; top: 47px"></i>
+        </div><div class="pf-3d-face pf-3d-back"></div>
+      </div>
+      <span class="back-wordmark">bezel.</span><i class="pf-3d-connector"></i>
+    </div>
+    <div class="pf-3d-button pf-3d-solid" style="left: 376px; top: 70px; transform: rotateY(90deg)" data-pf-solid="8,48,4,3"><div class="pf-3d-face pf-3d-front"></div><div class="pf-3d-face pf-3d-back"></div></div>
+    <i class="pf-3d-port" style="left: 173px; top: 515.7px; transform: rotateX(-90deg)" aria-hidden="true"></i>
+    <i class="pf-3d-speaker" style="left: 78px; top: 517.7px; transform: rotateX(-90deg)" aria-hidden="true"></i>
+    <i class="pf-3d-speaker" style="left: 260px; top: 517.7px; transform: rotateX(-90deg)" aria-hidden="true"></i>
+  </template>
+  <template id="watch-model">
+    <div class="pf-3d-band pf-3d-solid" style="top: 0" data-pf-solid="90,168,20,7"><div class="pf-3d-face pf-3d-front"></div><div class="pf-3d-face pf-3d-back"></div></div>
+    <div class="pf-3d-band pf-3d-solid" style="top: 310px" data-pf-solid="90,180,24,7"><div class="pf-3d-face pf-3d-front"><i class="pf-3d-band-holes"></i></div><div class="pf-3d-face pf-3d-back"><i class="pf-3d-band-holes"></i></div></div>
+    <div class="pf-3d-watch-case pf-3d-solid" data-pf-solid="160,190,40,38">
+      <div class="pf-3d-face pf-3d-front">
+        <div class="pf-3d-display"><div class="watch-ui" lang="ar" dir="rtl">
+          <time dir="ltr">9:41</time><span>صندوق أسهم</span><strong dir="ltr">EGX33</strong>
+          <div class="gain" dir="ltr">+89.5527%</div><small>عائد سنة · من الصورة الأصلية</small>
+          <svg viewBox="0 0 120 20" aria-hidden="true"><path d="M0 10 H120" stroke="#24414b"/><circle cx="60" cy="10" r="4" fill="#6ce0e6"/></svg>
+          <span dir="ltr">EGP 2.2335</span>
+        </div></div>
+      </div>
+      <div class="pf-3d-face pf-3d-back" aria-hidden="true"><i class="pf-3d-watch-sensors"></i></div>
+      <div class="pf-3d-crown pf-3d-solid" data-pf-solid="30,30,15,18" aria-hidden="true"><div class="pf-3d-face pf-3d-front"></div><div class="pf-3d-face pf-3d-back"></div></div>
+      <div class="pf-3d-button pf-3d-solid" style="left: 156px; top: 105px; transform: rotateY(90deg)" data-pf-solid="8,40,4,5" aria-hidden="true"><div class="pf-3d-face pf-3d-front"></div><div class="pf-3d-face pf-3d-back"></div></div>
+      <div class="pf-3d-button pf-3d-solid" style="left: -4px; top: 67px; transform: rotateY(-90deg); --pf-3d-glass: #d87735" data-pf-solid="8,34,4,5" aria-hidden="true"><div class="pf-3d-face pf-3d-front"></div><div class="pf-3d-face pf-3d-back"></div></div>
+      <i class="pf-3d-speaker" style="left: -21.2px; top: 125px; transform: rotateY(-90deg) rotateZ(90deg)" aria-hidden="true"></i>
+    </div>
+  </template>
+  <template id="laptop-model">
+    <div class="pf-3d-lid pf-3d-solid" data-pf-solid="480,300,14,10">
+      <div class="pf-3d-face pf-3d-front"><div class="pf-3d-display" data-stock-preview></div><i class="pf-3d-webcam"></i></div>
+      <div class="pf-3d-face pf-3d-back" aria-hidden="true"><span class="back-wordmark">bezel.</span></div>
+    </div>
+    <div class="pf-3d-deck pf-3d-solid" data-pf-solid="480,300,14,14" aria-hidden="true">
+      <div class="pf-3d-face pf-3d-front">
+        <div class="pf-3d-keyboard"></div><div class="pf-3d-trackpad"></div>
+        <i class="pf-3d-deck-grille" style="left: 15px"></i><i class="pf-3d-deck-grille" style="right: 15px"></i>
+      </div>
+      <div class="pf-3d-face pf-3d-back">
+        <i class="pf-3d-foot" style="left: 25px; top: 25px"></i><i class="pf-3d-foot" style="right: 25px; top: 25px"></i>
+        <i class="pf-3d-foot" style="left: 25px; bottom: 25px"></i><i class="pf-3d-foot" style="right: 25px; bottom: 25px"></i>
+      </div>
+      <i class="pf-3d-port" style="left: -17.2px; top: 40px; transform: rotateY(-90deg) rotateZ(90deg)"></i>
+      <i class="pf-3d-port" style="left: -17.2px; top: 90px; transform: rotateY(-90deg) rotateZ(90deg)"></i>
+      <i class="pf-3d-port" style="left: 463.2px; top: 60px; transform: rotateY(90deg) rotateZ(90deg)"></i>
+    </div>
+    <div class="pf-3d-solid" style="position: absolute; left: 28px; top: 292px; transform: rotateX(90deg); --pf-3d-glass: #202629" data-pf-solid="424,16,8,16" aria-hidden="true"><div class="pf-3d-face pf-3d-front"></div><div class="pf-3d-face pf-3d-back"></div></div>
+  </template>
+  <template id="stock-preview">
+    <div class="stock-preview">
+      <div class="stock-screen"><img src="https://raw.githubusercontent.com/vinothvino42/Mobile-Banking-App-UI/master/screenshots/analytics.png" alt="Mobile banking analytics app UI design" draggable="false"></div>
+      <div class="stock-details" lang="ar" dir="rtl"><b>صناديق الاستثمار</b><strong dir="ltr">EGX33</strong><p>اكتشف أفضل الصناديق<br>قارن وحلل الصناديق</p><p>معاينة ثابتة</p></div>
+    </div>
+  </template>
+  <script src="../js/phone-3d.js"></script>
+  <script>
+    const phone = document.querySelector('#phone');
+    const area = document.querySelector('.rotation-area');
+    const yaw = document.querySelector('#yaw');
+    const pitch = document.querySelector('#pitch');
+    const spin = document.querySelector('#spin');
+    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+    const modelSelect = document.querySelector('#device-model');
+    const phoneMarkup = phone.innerHTML;
+    const models = {
+      phone: { width: 300, height: 560, solid: '300,560,42,24', fit: 384, tilt: -12, description: 'Titanium phone · triple cameras, side buttons, and charging port.' },
+      tablet: { width: 380, height: 520, solid: '380,520,28,18', fit: 480, tilt: -12, description: 'iPad Pro-style tablet · thin unibody, camera, speakers, and magnetic connector.' },
+      watch: { width: 200, height: 490, fit: 320, tilt: -12, description: 'Apple Watch Ultra-style watch · sport band, digital crown, action button, and rear sensors.' },
+      laptop: { width: 480, height: 360, fit: 700, tilt: -24, description: 'MacBook Pro-style laptop · open hinged lid, keyboard, trackpad, side ports, and underside feet.' },
+    };
+    function fitModel() {
+      const available = document.querySelector('.stage').clientWidth;
+      area.style.setProperty('--preview-scale', Math.min(1, available / models[modelSelect.value].fit));
+    }
+    modelSelect.addEventListener('change', () => {
+      stop(); pointer = null;
+      const type = modelSelect.value, model = models[type];
+      phone.className = `pf-3d pf-3d-${type}${model.solid ? ' pf-3d-solid' : ''}`;
+      phone.removeAttribute('data-pf-solid'); phone.removeAttribute('style');
+      phone.style.width = `${model.width}px`; phone.style.height = `${model.height}px`;
+      if (model.solid) phone.dataset.pfSolid = model.solid;
+      if (type === 'phone') phone.innerHTML = phoneMarkup;
+      else phone.replaceChildren(document.querySelector(`#${type}-model`).content.cloneNode(true));
+      phone.querySelectorAll('[data-stock-preview]').forEach(display => {
+        display.append(document.querySelector('#stock-preview').content.cloneNode(true));
+      });
+      const keyboard = phone.querySelector('.pf-3d-keyboard');
+      if (keyboard) {
+        const keys = ['esc', ...'1234567890-=', '⌫', 'tab', ...'QWERTYUIOP[]', '\\', '⇧', ...'ASDFGHJKL;', '↵', '⇧', '↑', 'fn', ...'ZXCVBNM,./', '←', '↓', '→', 'ctrl', '⌥', '⌘', '', '', '', '', '', '', '', '⌘', '⌥', '←', '→'];
+        keys.forEach(key => { const cap = document.createElement('i'); cap.className = 'pf-3d-key'; cap.textContent = key; keyboard.append(cap); });
+      }
+      PhoneFrames3D.init(phone);
+      document.querySelector('#device-description').textContent = model.description;
+      x = model.tilt; y = -28; render(); fitModel();
+    });
+    new ResizeObserver(fitModel).observe(document.querySelector('.stage'));
+    let x = -12, y = -28, spinning = false, frame = 0, lastTime = 0, pointer = null;
+    function render() {
+      y = ((y + 180) % 360 + 360) % 360 - 180;
+      x = Math.max(-70, Math.min(70, x));
+      phone.style.setProperty('--pf-rotate-x', `${x}deg`);
+      phone.style.setProperty('--pf-rotate-y', `${y}deg`);
+      yaw.value = Math.round(y); pitch.value = Math.round(x);
+      document.querySelector('#yaw-value').value = `${Math.round(y)}°`;
+      document.querySelector('#pitch-value').value = `${Math.round(x)}°`;
+    }
+    function stop() {
+      spinning = false; cancelAnimationFrame(frame); lastTime = 0;
+      spin.setAttribute('aria-pressed', 'false'); spin.textContent = 'Auto rotate';
+    }
+    function animate(time) {
+      if (!spinning) return;
+      if (lastTime) y += Math.min(time - lastTime, 50) * .018;
+      lastTime = time; render(); frame = requestAnimationFrame(animate);
+    }
+    spin.addEventListener('click', () => {
+      if (spinning) return stop();
+      spinning = true; spin.setAttribute('aria-pressed', 'true'); spin.textContent = 'Pause rotation';
+      frame = requestAnimationFrame(animate);
+    });
+    for (const input of [yaw, pitch]) input.addEventListener('input', () => {
+      stop(); x = Number(pitch.value); y = Number(yaw.value); render();
+    });
+    document.querySelectorAll('[data-view]').forEach(button => button.addEventListener('click', () => {
+      stop(); [y, x] = button.dataset.view.split(',').map(Number); render();
+      if (button.textContent === 'Reset') { x = models[modelSelect.value].tilt; render(); }
+    }));
+    area.addEventListener('pointerdown', event => {
+      if (!event.isPrimary || event.button !== 0) return;
+      stop(); pointer = { id: event.pointerId, x: event.clientX, y: event.clientY };
+      area.setPointerCapture(event.pointerId); area.focus({ preventScroll: true });
+    });
+    area.addEventListener('pointermove', event => {
+      if (!pointer || pointer.id !== event.pointerId) return;
+      y += (event.clientX - pointer.x) * .5; x -= (event.clientY - pointer.y) * .4;
+      pointer.x = event.clientX; pointer.y = event.clientY; render();
+    });
+    for (const type of ['pointerup', 'pointercancel', 'lostpointercapture']) area.addEventListener(type, () => { pointer = null; });
+    area.addEventListener('keydown', event => {
+      if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home'].includes(event.key)) return;
+      event.preventDefault(); stop();
+      if (event.key === 'Home') { x = models[modelSelect.value].tilt; y = -28; }
+      else { y += event.key === 'ArrowRight' ? 5 : event.key === 'ArrowLeft' ? -5 : 0;
+        x += event.key === 'ArrowDown' ? -5 : event.key === 'ArrowUp' ? 5 : 0; }
+      render();
+    });
+    reducedMotion.addEventListener('change', stop);
+    document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); });
+    render();
+  </script>
+</body>
+</html>

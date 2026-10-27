@@ -147,8 +147,9 @@ src/
   _modifiers.css        — pf--* modifier classes
   _slots.css            — pf-status-bar, pf-nav-bar, pf-scroll-view, pf-tab-bar
   _presets.css          — device preset aliases
-iframe-scale.js         — iframe auto-scaling, standalone, ~30 lines
-status-bar.js           — status-bar auto-fill, standalone, ~20 lines
+js/
+  iframe-scale.js       — iframe auto-scaling, standalone, ~30 lines
+  status-bar.js         — status-bar auto-fill, standalone, ~20 lines
 ```
 
 No preprocessor required. Plain CSS custom properties throughout.  

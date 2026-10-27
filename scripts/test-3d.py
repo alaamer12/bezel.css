@@ -27,7 +27,7 @@ try:
         errors = []
         page.on('pageerror', lambda error: errors.append(str(error)))
         page.on('response', lambda response: errors.append(str(response.status)) if response.status >= 400 else None)
-        page.goto(f'http://127.0.0.1:{server.server_port}/test_3d.html')
+        page.goto(f'http://127.0.0.1:{server.server_port}/snduk-designs/templates/3d/snduk3d.html')
         page.wait_for_function("document.querySelector('img').naturalWidth === 810")
         assert page.locator('#phone > .pf-3d-side').count() == 68
         assert page.locator('.pf-3d-lens').count() == 3
@@ -71,7 +71,7 @@ try:
           invalid.id = 'invalid'; invalid.dataset.pfSolid = '0,40,30,-1';
           document.body.append(invalid);
         }""")
-        page.add_script_tag(url='/phone-3d.js')
+        page.add_script_tag(url='/js/phone-3d.js')
         assert page.locator('#phone > .pf-3d-side').count() == 68
         assert page.locator('#invalid > .pf-3d-side').count() == 0
         page.locator('#invalid').evaluate('e => e.remove()')

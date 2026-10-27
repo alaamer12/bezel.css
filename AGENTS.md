@@ -13,7 +13,7 @@ Preferences for AI agents working in this repository. Follow on every task, incl
 | [`.repertoire/.steering/structure.md`](.repertoire/.steering/structure.md) | Repo layout, file ownership, `pf-*` vs legacy |
 | [`.repertoire/.steering/tech.md`](.repertoire/.steering/tech.md) | bun, build scripts, conventions |
 | [`.repertoire/.steering/product.md`](.repertoire/.steering/product.md) | phone-frames features, success criteria |
-| [`REQUIREMENTS.md`](REQUIREMENTS.md) | Full product spec |
+| [`REQUIREMENTS.md`](docs/REQUIREMENTS.md) | Full product spec |
 
 Do not contradict steering docs without verifying the codebase first.
 
@@ -56,7 +56,7 @@ python -m http.server 8080
 
 - **phone-frames:** plain CSS in `src/_*.css` — no SCSS for new `pf-*` code
 - **Legacy devices.css:** SCSS partials in `src/_*.scss` — touch only for bug fixes
-- **JS utilities:** root-level `iframe-scale.js`, `status-bar.js` — vanilla, no bundler
+- **JS utilities:** `js/iframe-scale.js`, `js/status-bar.js`, `js/phone-3d.js` — vanilla, no bundler
 - **Customization:** CSS custom properties (`--pf-*`), not hardcoded theme values
 - **Modularity:** one class = one job; presets are thin class aliases
 
@@ -70,8 +70,8 @@ When using `up-agents`, respect scoped paths:
 |--------|------|
 | W1 | Steering, `AGENTS.md`, `package.json`, `scripts/build.ts` |
 | W2 | `src/_vars.css`, `_shell.css`, `_modifiers.css` |
-| W3 | `src/_slots.css`, `_presets.css`, `_compat-devices.css`, `iframe-scale.js`, `status-bar.js` |
-| Reviewer | `test.html`, integration fixes, screenshots |
+| W3 | `src/_slots.css`, `_presets.css`, `_compat-devices.css`, `js/iframe-scale.js`, `js/status-bar.js` |
+| Reviewer | `demo/`, integration fixes, screenshots |
 
 One worker owns each path; others read-only.
 
@@ -80,7 +80,7 @@ One worker owns each path; others read-only.
 ## Debugging
 
 - Try multiple approaches before giving up.
-- Visual QA: open `test.html` via local HTTP server (not `file://`).
+- Visual QA: open `demo/index.html` via local HTTP server (not `file://`).
 - Scratch debug files in `scratch/` — delete when finished.
 
 ---
@@ -96,7 +96,7 @@ When spawning a subagent, **paste this block first:**
    - .repertoire/.steering/structure.md
    - .repertoire/.steering/tech.md
    - .repertoire/.steering/product.md
-   - REQUIREMENTS.md
+   - docs/REQUIREMENTS.md
 
 2. SKILLS — Use at least ONE skill from .cursor/skills/ (read SKILL.md in full).
    Parallel implementation → .cursor/skills/up-agents/SKILL.md

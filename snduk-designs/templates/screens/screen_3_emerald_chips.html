@@ -3,45 +3,48 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Snduk - Screen 1 (Royal Blue Tech)</title>
-  <link rel="stylesheet" href="../styles.css">
+  <title>Snduk - Screen 3 (Emerald Wealth & Floating Cards)</title>
+  <link rel="stylesheet" href="../demo/styles.css">
   <style>
-    /* Fixed 810x1440 viewport frame */
-    body {
-      background: #090c10;
-    }
+    body { background: #060e0a; }
   </style>
 </head>
 <body>
-  <div class="play-canvas theme-royal-blue">
-    <!-- Ambient Background Effects -->
+  <div class="play-canvas theme-emerald-wealth">
     <div class="bg-orb-1"></div>
     <div class="bg-orb-2"></div>
-    <div class="bg-grid"></div>
 
     <!-- Header Section -->
     <header class="screen-header">
       <div class="tag-pill">
         <span class="dot"></span>
-        <span>منصة صندوق الاستثمارية</span>
+        <span>نمو وعوائد مدروسة</span>
       </div>
       <h1 class="header-title">
         اكتشف و قارن <span class="highlight">صناديق الاستثمار</span> بسهولة
       </h1>
       <p class="header-subtitle">
-        أكثر من 250 صندوق استثماري مرخص في السعودية بين يديك
+        قارن الرسوم، صافي الأصول، والعائد التاريخي بنقرة زر
       </p>
     </header>
 
-    <!-- 3D Phone Mockup Stage -->
-    <main class="stage-container stage-tilt-left">
+    <!-- 3D Stage with Floating Badges -->
+    <main class="stage-container stage-floating-chips">
+      <!-- Floating Chip 1 (Top Left) -->
+      <div class="floating-chip chip-pos-top-left">
+        <div class="chip-icon">📈</div>
+        <div class="chip-text">
+          <span class="chip-title">+24.5%</span>
+          <span class="chip-sub">أعلى عائد سنوي</span>
+        </div>
+      </div>
+
+      <!-- Phone Mockup -->
       <div class="device-mockup">
-        <!-- Physical Side Buttons -->
         <div class="btn-volume-up"></div>
         <div class="btn-volume-down"></div>
         <div class="btn-power"></div>
 
-        <!-- Phone Screen with test1.jfif -->
         <div class="device-screen-wrap">
           <!-- Status Bar -->
           <div class="mockup-status-bar">
@@ -65,15 +68,21 @@
               </svg>
             </div>
           </div>
-          <!-- Dynamic Island -->
           <div class="dynamic-island">
             <div class="camera-lens"></div>
             <div class="sensor"></div>
           </div>
-          <!-- Screen Glare Reflection -->
           <div class="screen-glare"></div>
-          <!-- Screenshot Image (Top cut for clean safe area) -->
-          <img class="screen-image" src="../input/test1.jfif" alt="Snduk App Interface">
+          <img class="screen-image" src="../../input/1.jfif" alt="Snduk App Interface">
+        </div>
+      </div>
+
+      <!-- Floating Chip 2 (Bottom Right) -->
+      <div class="floating-chip chip-pos-bottom-right">
+        <div class="chip-icon">🛡️</div>
+        <div class="chip-text">
+          <span class="chip-title">مرخص 100%</span>
+          <span class="chip-sub">هيئة السوق المالية</span>
         </div>
       </div>
     </main>

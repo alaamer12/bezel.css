@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Snduk · 3D device studio</title>
-  <link rel="stylesheet" href="dist/phone-frames.css">
+  <link rel="stylesheet" href="../../../dist/phone-frames.css">
   <style>
     * { box-sizing: border-box; }
     body { margin: 0; color: #e7edf0; background: #0b1117; font: 15px/1.5 system-ui, sans-serif; }
@@ -59,7 +59,7 @@
         <div class="pf-3d pf-3d-solid" id="phone" data-pf-solid="300,560,42,24">
           <div class="pf-3d-face pf-3d-front">
             <div class="pf-3d-display stock-screen">
-              <img src="snduk-designs/output/screenshots/screen_1_best_funds.png" alt="Snduk Arabic investment fund discovery screen" draggable="false">
+              <img src="../../output/screenshots/screen_1_best_funds.png" alt="Snduk Arabic investment fund discovery screen" draggable="false">
             </div>
           </div>
           <div class="pf-3d-face pf-3d-back" aria-hidden="true">
@@ -115,7 +115,7 @@
         </div>
       </div>
       <p class="note">CSS 3D concepts, not manufacturer CAD models. Phone, tablet, and laptop use the supplied artwork’s visible screen (the original bottom is cut off). Watch content is an adapted static summary, not a live app.</p>
-      <a class="source" href="snduk-designs/output/screenshots/screen_1_best_funds.png">View original artwork ↗</a>
+      <a class="source" href="../../output/screenshots/screen_1_best_funds.png">View original artwork ↗</a>
       <noscript><p>Enable JavaScript for device selection, rounded sidewalls, and rotation controls. The phone screen remains visible without it.</p></noscript>
     </aside>
   </main>
@@ -178,11 +178,11 @@
   </template>
   <template id="stock-preview">
     <div class="stock-preview">
-      <div class="stock-screen"><img src="snduk-designs/output/screenshots/screen_1_best_funds.png" alt="Snduk fund discovery screenshot" draggable="false"></div>
+      <div class="stock-screen"><img src="../../output/screenshots/screen_1_best_funds.png" alt="Snduk fund discovery screenshot" draggable="false"></div>
       <div class="stock-details" lang="ar" dir="rtl"><b>صناديق الاستثمار</b><strong dir="ltr">EGX33</strong><p>اكتشف أفضل الصناديق<br>قارن وحلل الصناديق</p><p>معاينة ثابتة</p></div>
     </div>
   </template>
-  <script src="phone-3d.js"></script>
+  <script src="../../../js/phone-3d.js"></script>
   <script>
     const phone = document.querySelector('#phone');
     const area = document.querySelector('.rotation-area');

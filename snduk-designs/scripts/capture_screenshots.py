@@ -28,7 +28,7 @@ def run_server(port, root_dir):
     httpd.serve_forever()
 
 def main():
-    root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
     port = find_free_port()
     
     # Start HTTP server thread
@@ -40,13 +40,13 @@ def main():
     print(f"[*] Started temporary HTTP server on {base_url}")
 
     templates = [
-        ("screen_1_best_funds", "snduk-designs/templates/screen_1_best_funds.html"),
-        ("screen_2_fund_details", "snduk-designs/templates/screen_2_fund_details.html"),
-        ("screen_3_advanced_analysis", "snduk-designs/templates/screen_3_advanced_analysis.html"),
-        ("screen_4_smart_recommendations", "snduk-designs/templates/screen_4_smart_recommendations.html"),
-        ("screen_5_historical_prices", "snduk-designs/templates/screen_5_historical_prices.html"),
-        ("screen_6_competing_funds", "snduk-designs/templates/screen_6_competing_funds.html"),
-        ("screen_7_investor_community", "snduk-designs/templates/screen_7_investor_community.html"),
+        ("screen_1_best_funds", "snduk-designs/templates/screens/screen_1_best_funds.html"),
+        ("screen_2_fund_details", "snduk-designs/templates/screens/screen_2_fund_details.html"),
+        ("screen_3_advanced_analysis", "snduk-designs/templates/screens/screen_3_advanced_analysis.html"),
+        ("screen_4_smart_recommendations", "snduk-designs/templates/screens/screen_4_smart_recommendations.html"),
+        ("screen_5_historical_prices", "snduk-designs/templates/screens/screen_5_historical_prices.html"),
+        ("screen_6_competing_funds", "snduk-designs/templates/screens/screen_6_competing_funds.html"),
+        ("screen_7_investor_community", "snduk-designs/templates/screens/screen_7_investor_community.html"),
     ]
 
     output_dirs = [

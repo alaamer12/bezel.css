@@ -72,7 +72,9 @@ Override default values using CSS custom properties:
 ## 3D stock-app device studio
 
 Serve the repository with `python -m http.server 8080`, then open
-`http://localhost:8080/test_3d.html`. Choose a titanium phone, iPad Pro-style
+`http://localhost:8080/demo/3d-design.html` (web-hosted mobile design screen) or
+`http://localhost:8080/snduk-designs/templates/3d/snduk3d.html` (same studio with the Snduk fund
+artwork). Choose a titanium phone, iPad Pro-style
 tablet, Apple Watch Ultra-style watch, or MacBook Pro-style laptop. Drag, use
 arrow keys, or select front, back, edge, and port views. Auto-rotation is opt-in
 and can be paused. No changes to the legacy `.device-*` models are required.
@@ -86,7 +88,7 @@ screens present the source as a static preview; the watch uses an adapted
 static fund summary instead of squeezing the entire screenshot into a watch.
 
 Reusable classes live in `src/_3d.css` and are included in the normal bundle.
-Include `phone-3d.js` after your markup to generate sidewalls for
+Include `js/phone-3d.js` after your markup to generate sidewalls for
 `.pf-3d-solid[data-pf-solid="width,height,radius,depth"]` (pixel dimensions).
 Use `.pf-3d-face.pf-3d-front` and `.pf-3d-face.pf-3d-back` for its faces,
 inside a `.pf-3d-scene` perspective container. Put `.pf-3d` on the rotating
@@ -94,7 +96,8 @@ solid and customize `--pf-rotate-x`, `--pf-rotate-y`, `--pf-perspective`,
 `--pf-3d-metal`, `--pf-3d-glass`, and `--pf-3d-edge`. Keep clipping and opacity
 off the 3D ancestors so browsers do not flatten the model.
 Call `PhoneFrames3D.init(container)` after adding or replacing solid markup.
-Device assembly examples are the templates in `test_3d.html`; the optional
+Device assembly examples are the templates in `demo/3d-design.html` and
+`snduk-designs/templates/3d/snduk3d.html`; the optional
 `.pf-3d-tablet`, `.pf-3d-watch`, and `.pf-3d-laptop` classes style their parts.
 
 Browser smoke tests: `python scripts/test-3d.py` (requires Python Playwright

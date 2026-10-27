@@ -727,3 +727,206 @@ body {
   0% { transform: translateY(0px); }
   100% { transform: translateY(-12px); }
 }
+
+/* ==========================================================================
+   13-inch iPad Pro Canvas & Mockup Styles
+   Dimensions: 2064 x 2752 px (App Store 13" iPad Portrait Standard)
+   ========================================================================== */
+
+.ipad-canvas {
+  width: 2064px;
+  height: 2752px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 140px 100px 0;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+/* Scaled ambient orbs for iPad canvas */
+.ipad-canvas .bg-orb-1 {
+  width: 1200px;
+  height: 1200px;
+  filter: blur(120px);
+}
+
+.ipad-canvas .bg-orb-2 {
+  width: 1300px;
+  height: 1300px;
+  filter: blur(140px);
+}
+
+/* iPad Header Section */
+.ipad-canvas .screen-header {
+  max-width: 1800px;
+  margin-top: 50px;
+  margin-bottom: 40px;
+}
+
+.ipad-canvas .header-title {
+  font-size: 130px;
+  font-weight: 700;
+  line-height: 1.32;
+  margin-bottom: 24px;
+  letter-spacing: -1px;
+}
+
+.ipad-canvas .header-title .highlight {
+  text-shadow: 0 0 45px rgba(103, 232, 249, 0.55);
+}
+
+/* 13-inch iPad Mockup (Bottom Hero Stage) */
+.ipad-stage-bottom-hero {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  perspective: 2400px;
+  perspective-origin: 50% 30%;
+  z-index: 5;
+  margin-top: 40px;
+}
+
+/* 13-inch iPad Pro Mockup Enclosure */
+.ipad-mockup {
+  position: relative;
+  width: 1720px;
+  background: #111317;
+  border-radius: 68px;
+  padding: 38px;
+  transform: translateY(60px);
+  transform-style: preserve-3d;
+  box-shadow: 
+    0 0 0 2px #4b5262,
+    0 0 0 5px #262a34,
+    0 0 0 9px #0e1117,
+    0 60px 140px -20px rgba(0, 0, 0, 0.85),
+    0 90px 180px -30px rgba(0, 0, 0, 0.65);
+}
+
+/* iPad Metallic Chamfer / Bezel Highlight */
+.ipad-mockup::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 70px;
+  padding: 2px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.06) 35%, rgba(0,0,0,0.8) 70%, rgba(255,255,255,0.2) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* iPad Top Power Button */
+.ipad-mockup .ipad-btn-power {
+  position: absolute;
+  top: -6px;
+  right: 140px;
+  width: 90px;
+  height: 6px;
+  background: #2b2e38;
+  border-radius: 3px 3px 0 0;
+}
+
+/* iPad Side Volume Buttons */
+.ipad-mockup .ipad-btn-vol-up {
+  position: absolute;
+  right: -6px;
+  top: 140px;
+  width: 6px;
+  height: 75px;
+  background: #2b2e38;
+  border-radius: 0 3px 3px 0;
+}
+
+.ipad-mockup .ipad-btn-vol-down {
+  position: absolute;
+  right: -6px;
+  top: 235px;
+  width: 6px;
+  height: 75px;
+  background: #2b2e38;
+  border-radius: 0 3px 3px 0;
+}
+
+/* iPad Screen Frame (aspect ratio 3:4 for 13" iPad Pro 2064x2752) */
+.ipad-screen-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  min-height: 2192px;
+  background: #0f172a;
+  border-radius: 42px;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1), inset 0 0 0 2px rgba(0,0,0,0.9);
+}
+
+/* iPad Front TrueDepth Camera (Centered in bezel above screen) */
+.ipad-camera {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  background: #0b0e14;
+  border-radius: 50%;
+  border: 1px solid #1e2535;
+  z-index: 130;
+}
+.ipad-camera::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(circle, #3d68a2 0%, #0e1d35 70%);
+  border-radius: 50%;
+  box-shadow: 0 0 2px rgba(255, 255, 255, 0.4);
+}
+
+/* iPad Screen Image Layout */
+.ipad-screen-image-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: #f8fafc;
+}
+
+/* In iPad mode, display full app screen starting cleanly below bezel */
+.ipad-screen-image {
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+  display: block;
+}
+
+/* Screen-specific top offsets to align navbar perfectly below iPad bezel */
+.ipad-screen-offset-1 { margin-top: 0; }
+.ipad-screen-offset-2 { margin-top: 0; }
+.ipad-screen-offset-3 { margin-top: 0; }
+.ipad-screen-offset-4 { margin-top: 0; }
+.ipad-screen-offset-5 { margin-top: 0; }
+.ipad-screen-offset-6 { margin-top: 0; }
+.ipad-screen-offset-7 { margin-top: 0; }
+
+/* Screen glare reflection for iPad */
+.ipad-screen-glare {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(130deg, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0.02) 35%, transparent 65%);
+  pointer-events: none;
+  border-radius: 42px;
+  z-index: 50;
+}
