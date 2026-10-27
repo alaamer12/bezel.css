@@ -1,0 +1,41 @@
+{
+  "skill": "graphics",
+  "evals": [
+    {
+      "id": "eval-1-core-pipeline",
+      "query": "Create App Store screenshots for my Arabic fund-investment app. The real app screenshots and the headline copy per screen are in snduk-designs/input/. Target iPhone 6.9\" (1320x2868). Deliver PNGs.",
+      "files": ["snduk-designs/input/1.jfif", "snduk-designs/input/content.txt"],
+      "expected_behavior": [
+        "Confirms input screenshots exist and uses ONLY user-provided screenshots as product UI (never invents app content)",
+        "States or asks about frame choice before building (iPhone vs others); if unattended, records the assumption",
+        "Creates the skill's directory layout (input/, output/<frame>/, scripts/, templates/demo|screens)",
+        "Writes one thin HTML template per screen plus a single shared stylesheet with theme custom properties",
+        "Runs the skill's scripts/capture.py with a JSON shot list instead of hand-writing Playwright code",
+        "Output PNGs are exactly 1320x2868 and each is opened and visually QA'd; defects fixed in templates and recaptured",
+        "Final report lists delivered file paths and any known issues"
+      ]
+    },
+    {
+      "id": "eval-2-multi-target",
+      "query": "I need Google Play assets from the screenshots in snduk-designs/input/: phone screenshots at 1080x1920 plus a 1024x500 feature graphic.",
+      "files": ["snduk-designs/input/1.jfif"],
+      "expected_behavior": [
+        "Consults references/frames.md for Play aspect-ratio rules and feature graphic size",
+        "Phone shots captured at exactly 1080x1920; feature graphic at exactly 1024x500 with a landscape composition (device frame not cropped by portrait canvas)",
+        "Reuses the same templates with different canvas/viewport rather than duplicating designs",
+        "QA pass on every PNG before delivery"
+      ]
+    },
+    {
+      "id": "eval-3-intake-compliance",
+      "query": "Make my app look good on the store.",
+      "files": [],
+      "expected_behavior": [
+        "Does NOT start building graphics immediately",
+        "Asks for input screenshots (mandatory), which device frames to support, target stores, and brand/copy",
+        "Mentions optional inspire/ references",
+        "Does not fabricate product UI from the app description alone"
+      ]
+    }
+  ]
+}

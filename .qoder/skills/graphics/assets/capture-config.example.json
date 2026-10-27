@@ -1,0 +1,26 @@
+{
+  "shots": [
+    {
+      "template": "graphics/templates/screens/screen_1_hero.html",
+      "frame": "ios-6.9",
+      "width": 1320,
+      "height": 2868,
+      "name": "screen_1_hero"
+    },
+    {
+      "template": "graphics/templates/screens/screen_2_checkout.html",
+      "frame": "ios-6.9",
+      "width": 1320,
+      "height": 2868,
+      "name": "screen_2_checkout"
+    },
+    {
+      "template": "graphics/templates/screens/screen_1_hero.html",
+      "frame": "android-1080",
+      "width": 1080,
+      "height": 1920,
+      "name": "screen_1_hero"
+    }
+  ],
+  "output_dir": "graphics/output"
+}
